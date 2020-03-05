@@ -99,7 +99,7 @@ namespace TBGame.DataLayer
                     Description = "Matilda's Palette is Hillview's sole art store as well as your place of employment, with walls " +
                     "lined with shelves of canvas rolls, fabrics, and various paints and drawing tools. You recognize your most " +
                     "frequented section of the store when you're not working: the watercolor kits. A less materialized version of " +
-                    "Matilda, of the store's namesake, greets you as you step inside before asking you to stock some of the back " +
+                    "Matilda, the store's owner, greets you as you step inside before asking you to stock some of the back " +
                     "shelves that have been cleared by today's sale.",
                     Accessible = false,
                     ModifyMemoryCount = 1,

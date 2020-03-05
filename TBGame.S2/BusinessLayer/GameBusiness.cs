@@ -54,7 +54,6 @@ namespace TBGame.BusinessLayer
         /// </summary>
         private void InitializeDataSet()
         {
-            _player = GameData.PlayerData();
             _gameMap = GameData.GameMap();
         }
 
