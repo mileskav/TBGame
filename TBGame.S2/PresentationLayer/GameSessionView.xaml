@@ -174,7 +174,6 @@
                             <TextBox
                                     Text="{Binding Player.Age}"
                                     Style="{StaticResource MainPanelTextBoxStyle}"/>
-                            
                         </StackPanel>
                         <StackPanel Margin="25, 0">
                             <Label

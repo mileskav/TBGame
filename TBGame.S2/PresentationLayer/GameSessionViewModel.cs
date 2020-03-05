@@ -116,9 +116,7 @@ namespace TBGame.PresentationLayer
         /// </summary>
         private void OnPlayerMove()
         {
-            //
             // set new current location
-            //
             foreach (Location location in AccessibleLocations)
             {
                 if (location.Name == _currentLocationName)
@@ -128,32 +126,21 @@ namespace TBGame.PresentationLayer
             }
             //_currentLocation = AccessibleLocations.FirstOrDefault(l => l.Name == _currentLocationName);
 
-            //
             // update stats if player has not visited the location
-            //
             if (!_player.HasVisited(_currentLocation))
             {
-                //
                 // update list of visited locations
-                //
                 _player.LocationsVisited.Add(_currentLocation);
 
-                //
                 // update player experience points
-                //
                 _player.Memories += _currentLocation.ModifyMemoryCount;
 
             }
 
-            //
             // display a new message if available
-            //
             OnPropertyChanged(nameof(MessageDisplay));
 
-
-            //
             // update the list of locations
-            //
             UpdateAccessibleLocations();
         }
 
@@ -162,14 +149,10 @@ namespace TBGame.PresentationLayer
         /// </summary>
         private void UpdateAccessibleLocations()
         {
-            //
             // reset accessible locations list
-            //
             _accessibleLocations.Clear();
 
-            //
             // add all accessible locations to list
-            //
             foreach (Location location in _gameMap.Locations)
             {
                 if (
@@ -180,14 +163,10 @@ namespace TBGame.PresentationLayer
                 }
             }
 
-            //
             // remove current location
-            //
             _accessibleLocations.Remove(_accessibleLocations.FirstOrDefault(l => l == _currentLocation));
 
-            //
             // notify list box in view to update
-            //
             OnPropertyChanged(nameof(AccessibleLocations));
         }
 

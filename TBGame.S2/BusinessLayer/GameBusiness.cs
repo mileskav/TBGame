@@ -40,9 +40,7 @@ namespace TBGame.BusinessLayer
                 _playerSetupView = new PlayerSetupView(_player);
                 _playerSetupView.ShowDialog();
 
-                //
                 // setup up game based player properties
-                //
                 _player.Memories = 0;
             }
             else
@@ -65,9 +63,7 @@ namespace TBGame.BusinessLayer
         /// </summary>
         private void InstantiateAndShowView()
         {
-            //
             // instantiate the view model and initialize the data set
-            //
             _gameSessionViewModel = new GameSessionViewModel(
                 _player,
                 _gameMap
