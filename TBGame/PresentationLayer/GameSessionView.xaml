@@ -1,0 +1,426 @@
+﻿<Window x:Class="TBGame.PresentationLayer.GameSessionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBGame.PresentationLayer"
+        mc:Ignorable="d"
+        Title="GameSessionView" Height="500" Width="800" Background="#2a2d36" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="WindowButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="125"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="#484d51"/>
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid 
+                            Width="{TemplateBinding Width}" 
+                            Height="{TemplateBinding Height}" 
+                            ClipToBounds="True">
+                            <Rectangle 
+                                x:Name="innerRectangle" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                Fill="{TemplateBinding Background}" 
+                                RadiusX="5" 
+                                RadiusY="5" />
+                            <!-- Present Content (text) of the button. -->
+                            <DockPanel Name="myContentPresenterDockPanel">
+                                <ContentPresenter 
+                                    x:Name="myContentPresenter" 
+                                    Margin="2" 
+                                    HorizontalAlignment="Center"
+                                    Content="{TemplateBinding  Content}" 
+                                    TextBlock.Foreground="FloralWhite" />
+                            </DockPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="LightSteelBlue" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#00000a"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="MainPanelLabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="MainPanelTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="MainPanelTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Padding" Value="3,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border 
+                            Background="{TemplateBinding Background}"   
+                            x:Name="Bd" 
+                            BorderBrush="Black"  
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="350" HorizontalAlignment="Left">
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="300"
+                    Height="100"
+                    Margin="20">
+                    <Label 
+                    Content="Graphic Interface"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="300"
+                    Height="280"
+                    Margin="10">
+                    <Label 
+                     Content="Story Interface"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+            </StackPanel>
+            <StackPanel>
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="400"
+                    Height="110"
+                    Margin="20">
+                    <Label
+                        Content="Inventory and Quest Interface"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Height="140">
+                    <StackPanel Margin="0,-5">
+                        <Button
+                            Margin="20,0"
+                            Height="25"
+                            Content="North"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="5"
+                            Height="25"
+                            Content="South"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="0"
+                            Height="25"
+                            Content="East"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="5"
+                            Height="25"
+                            Content="West"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="5"
+                            Height="25"
+                            Content=""
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                    </StackPanel>
+                    <Border
+                        Style="{StaticResource BorderStyle}"
+                        Width="250"
+                        Height="170"
+                        Margin="-2, -16">
+                        <Label
+                        Content="Item and NPC Interface"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MainPanelLabelStyle}"/>
+                        
+                    </Border>
+                </StackPanel>
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="400"
+                    Height="110"
+                    Margin="20,30">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Margin="25, 5">
+                            <Label
+                                Content="Name"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox
+                                Text="{Binding Player.Name}"
+                                Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            <Label
+                                Content="Energy"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox
+                                Text="{Binding Player.EnergyLevel}"
+                                Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="25, 5">
+                                <Label
+                                    Content="Current Memory"
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource MainPanelLabelStyle}"/>
+                                <TextBox
+                                    Text="{Binding Player.CurrentMem}"
+                                    Style="{StaticResource MainPanelTextBoxStyle}"/>
+                                <TextBlock
+                                    Text="Memories Collected"
+                                    TextWrapping="Wrap"
+                                    HorizontalAlignment="Center"
+                                    Margin="5"
+                                    Style="{StaticResource MainPanelTextBlockStyle}"/>
+                                <TextBox
+                                    Text="{Binding Player.Memories}"
+                                    Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                    
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
+<!--<Window x:Class="TBGame.PresentationLayer.GameSessionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBGame.PresentationLayer"
+        mc:Ignorable="d"
+        Title="GameSessionView" Height="500" Width="800" Background="#2a2d36">
+    <Window.Resources>
+        <Style x:Key="WindowButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="125"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="#484d51"/>
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="FontFamily" Value="Gadugi"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid 
+                            Width="{TemplateBinding Width}" 
+                            Height="{TemplateBinding Height}" 
+                            ClipToBounds="True">
+                            <Rectangle 
+                                x:Name="innerRectangle" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                Fill="{TemplateBinding Background}" 
+                                RadiusX="5" 
+                                RadiusY="5" />
+                            --><!-- Present Content (text) of the button. --><!--
+                            <DockPanel Name="myContentPresenterDockPanel">
+                                <ContentPresenter 
+                                    x:Name="myContentPresenter" 
+                                    Margin="2" 
+                                    HorizontalAlignment="Center"
+                                    Content="{TemplateBinding  Content}" 
+                                    TextBlock.Foreground="FloralWhite" />
+                            </DockPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="LightSteelBlue" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#00000a"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="MainPanelLabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="MainPanelTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Corbel"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="MainPanelTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Padding" Value="3,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border 
+                            Background="{TemplateBinding Background}"   
+                            x:Name="Bd" 
+                            BorderBrush="Black"  
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="350" HorizontalAlignment="Left">
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="300"
+                    Height="100"
+                    Margin="20">
+                    <Label 
+                    Content="Graphic Interface"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="300"
+                    Height="280"
+                    Margin="10">
+                    <Label 
+                     Content="Story Interface"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+            </StackPanel>
+            <StackPanel>
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="400"
+                    Height="110"
+                    Margin="20">
+                    <Label
+                        Content="Inventory and Quest Interface"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Height="140">
+                    <StackPanel Margin="0,-5">
+                        <Button
+                            Margin="20,0"
+                            Height="25"
+                            Content="North"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="5"
+                            Height="25"
+                            Content="South"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="0"
+                            Height="25"
+                            Content="East"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="5"
+                            Height="25"
+                            Content="West"
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                        <Button
+                            Margin="5"
+                            Height="25"
+                            Content=""
+                            Style="{DynamicResource WindowButtonStyle}"/>
+                    </StackPanel>
+                    <Border
+                        Style="{StaticResource BorderStyle}"
+                        Width="125"
+                        Height="170"
+                        Margin="-2, -16">
+                        <StackPanel>
+                            <Label
+                            Content="Name"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox
+                                Text="{Binding Player.Name}"
+                                Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            <Label
+                            Content="Energy"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox
+                                Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            <Label
+                                    Content="Current Memory"
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox
+                                    Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            <TextBlock
+                                    Text="Memories Collected"
+                                    TextWrapping="Wrap"
+                                    HorizontalAlignment="Center"
+                                    Style="{StaticResource MainPanelTextBlockStyle}"/>
+                            <TextBox
+                                    Style="{StaticResource MainPanelTextBoxStyle}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <Border
+                    Style="{StaticResource BorderStyle}"
+                    Width="400"
+                    Height="110"
+                    Margin="20,30">
+                    <Label
+                        Content="Item and NPC Interface"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MainPanelLabelStyle}"/>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>-->
