@@ -22,14 +22,26 @@ namespace TBGame.PresentationLayer
         private Location _currentLocation;
         private ObservableCollection<Location> _accessibleLocations;
         private string _currentLocationName;
+        private GameItemQuantity _currentGameItem;
+        private string _currentLocationInformation;
         #endregion
 
         #region PROPERTIES
+        public string CurrentLocationInformation
+        {
+            get { return _currentLocationInformation; }
+            set
+            {
+                _currentLocationInformation = value;
+                OnPropertyChanged(nameof(CurrentLocationInformation));
+            }
+        }
         public Player Player
         {
             get { return _player; }
             set { _player = value; }
         }
+
         public string MessageDisplay
         {
             get { return _currentLocation.Message; }
@@ -48,6 +60,7 @@ namespace TBGame.PresentationLayer
                 OnPropertyChanged(nameof(CurrentLocation));
             }
         }
+
         public ObservableCollection<Location> AccessibleLocations
         {
             get
@@ -60,6 +73,7 @@ namespace TBGame.PresentationLayer
                 OnPropertyChanged(nameof(AccessibleLocations));
             }
         }
+
         public string CurrentLocationName
         {
             get { return _currentLocationName; }
@@ -71,6 +85,11 @@ namespace TBGame.PresentationLayer
             }
         }
 
+        public GameItemQuantity CurrentGameItem
+        {
+            get { return _currentGameItem; }
+            set { _currentGameItem = value; }
+        }
         #endregion
 
         #region CONSTRUCTORS
@@ -103,6 +122,8 @@ namespace TBGame.PresentationLayer
         private void InitializeView()
         {
             UpdateAccessibleLocations();
+            _player.UpdateInventoryCategories();
+            _player.CalculateWealth();
         }
 
         /// <summary>
@@ -127,18 +148,8 @@ namespace TBGame.PresentationLayer
                 _player.LocationsVisited.Add(_currentLocation);
 
                 // update player experience points
-                _player.ExperiencePoints += _currentLocation.ModifyExperience;
+                _player.Memories += _currentLocation.ModifyMemoryCount;
 
-                // update player health
-                //
-                if (_currentLocation.ModifyHealth != 0)
-                {
-                    _player.Health += _currentLocation.ModifyHealth;
-                    if (_player.Health > 100)
-                    {
-                        _player.Health = 100;
-                    }
-                }
             }
 
             // display a new message if available
@@ -161,7 +172,7 @@ namespace TBGame.PresentationLayer
             {
                 if (
                     location.Accessible == true ||
-                    _player.ExperiencePoints >= location.RequiredExperience)
+                    _player.Memories >= location.RequiredMemoryCount)
                 {
                     _accessibleLocations.Add(location);
                 }
@@ -174,6 +185,89 @@ namespace TBGame.PresentationLayer
             OnPropertyChanged(nameof(AccessibleLocations));
         }
 
+        public void AddItemToInventory()
+        {
+            // confirm a game item is selected and in current location
+            // subtract from location and add to inventory
+            if (_currentGameItem != null && _currentLocation.GameItems.Contains(_currentGameItem))
+            {
+                // cast selected game item
+                GameItemQuantity selectedGameItemQuantity = _currentGameItem as GameItemQuantity;
+
+                _currentLocation.RemoveGameItemQuantityFromLocation(selectedGameItemQuantity);
+                _player.AddGameItemQuantityToInventory(selectedGameItemQuantity);
+
+                OnPlayerPickUp(selectedGameItemQuantity);
+            }
+        }
+
+        public void RemoveItemFromInventory()
+        {
+            // confirm game item is selected and is in inventory
+            // subtract from inventory and add to location
+            if (_currentGameItem != null)
+            {
+                // cast selected game item
+                GameItemQuantity selectedGameItemQuantity = _currentGameItem as GameItemQuantity;
+
+                _currentLocation.AddGameItemQuantityToLocation(selectedGameItemQuantity);
+                _player.RemoveGameItemQuantityFromInventory(selectedGameItemQuantity);
+
+                OnPlayerPutDown(selectedGameItemQuantity);
+            }
+        }
+
+        private void OnPlayerPickUp(GameItemQuantity gameItemQuantity)
+        {
+            _player.Wealth += gameItemQuantity.GameItem.Value;
+        }
+
+        private void OnPlayerPutDown(GameItemQuantity gameItemQuantity)
+        {
+            _player.Wealth -= gameItemQuantity.GameItem.Value;
+        }
+
+        public void OnUseGameItem()
+        {
+            switch (_currentGameItem.GameItem)
+            {
+                case Consumable consumable:
+                    ProcessConsumableUse(consumable);
+                    break;
+                case KeyItem keyItem:
+                    ProcessKeyItemUse(keyItem);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ProcessKeyItemUse(KeyItem keyItem)
+        {
+            string message;
+
+            switch (keyItem.UseAction)
+            {
+                case KeyItem.UseActionType.COMBINE:
+                    //todo - add to this
+                    break;
+                case KeyItem.UseActionType.OPENLOCATION:
+                    message = _gameMap.OpenLocationsByKeyItem(keyItem.Id);
+                    CurrentLocationInformation = keyItem.UseMessage;
+                    break;
+                case KeyItem.UseActionType.GIVENPC:
+                    //todo - add to this
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ProcessConsumableUse(Consumable consumable)
+        {
+            _player.EnergyLevel += consumable.EnergyChange;
+            _player.RemoveGameItemQuantityFromInventory(_currentGameItem);
+        }
         #endregion
 
     }

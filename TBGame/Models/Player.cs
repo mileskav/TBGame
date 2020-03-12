@@ -9,31 +9,30 @@ namespace TBGame.Models
     public class Player : Character
     {
         #region FIELDS
-        private int _memories;
-        private int _currentMem;
+        private int _health;
+        private int _experiencePoints;
         #endregion
 
         #region PROPERTIES
-        public int Memories
+        public int Health
         {
-            get { return _memories; }
-            set { _memories = value; }
+            get { return _health; }
+            set { _health = value; }
         }
-        public int CurrentMem
+        public int ExperiencePoints
         {
-            get { return _currentMem; }
-            set { _currentMem = value; }
+            get { return _experiencePoints; }
+            set { _experiencePoints = value; }
         }
-
         #endregion
 
         #region METHODS
 
         public override string Greeting()
         {
-            return $"Hi, my name is {Name} and I am feeling {EnergyLevel}.";
+            return $"Hi, my name is {Name} and I am an avatar of the {ControllingEntity}.";
         }
-        public override bool isRemembered()
+        public override bool HasStatement()
         {
             return false;
         }

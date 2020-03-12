@@ -10,12 +10,22 @@ namespace TBGame.Models
     public abstract class Character
     {
         #region ENUMS 
-        public enum Energy
+        public enum Entity
         {
-            Energized,
-            Average,
-            Tired,
-            Exhausted
+            Buried,
+            Corruption,
+            Dark,
+            Desolation,
+            End,
+            Eye,
+            Flesh,
+            Hunt,
+            Lonely,
+            Slaughter,
+            Spiral,
+            Stranger,
+            Vast,
+            Web
         }
         #endregion
 
@@ -23,7 +33,7 @@ namespace TBGame.Models
         protected int _id;
         protected string _name;
         protected int _locationId;
-        protected Energy _energy;
+        protected Entity _entity;
         #endregion
 
         #region PROPERTIES
@@ -43,10 +53,10 @@ namespace TBGame.Models
             set { _locationId = value; }
         }
 
-        public Energy EnergyLevel
+        public Entity ControllingEntity
         {
-            get { return _energy; }
-            set { _energy = value; }
+            get { return _entity; }
+            set { _entity = value; }
         }
         #endregion
 
@@ -56,12 +66,12 @@ namespace TBGame.Models
 
         }
 
-        public Character(string name, int id, int locationId, Energy energy)
+        public Character(string name, int id, int locationId, Entity entity)
         {
             _name = name;
             _id = id;
             _locationId = locationId;
-            _energy = energy;
+            _entity = entity;
         }
         #endregion
 
@@ -69,9 +79,10 @@ namespace TBGame.Models
 
         public virtual string Greeting()
         {
-            return $"How's it going? You remember me, right?";
+            return $"Oh. You're from the institute, aren't you?";
         }
-        public abstract bool isRemembered();
+        
+        public abstract bool HasStatement();
         #endregion
     }
 }

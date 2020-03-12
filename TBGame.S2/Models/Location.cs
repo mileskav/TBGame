@@ -17,9 +17,10 @@ namespace TBGame.Models
         private string _name;
         private string _description;
         private bool _accessible;
-        private int _requiredMemoryCount;
-        private int _modifyMemoryCount;
+        private int _requiredExperience;
+        private int _modifyExperience;
         private string _message;
+        private int _modifyHealth;
 
         #endregion
 
@@ -49,22 +50,25 @@ namespace TBGame.Models
             set { _accessible = value; }
         }
 
-        public int ModifyMemoryCount
+        public int ModifyExperience
         {
-            get { return _modifyMemoryCount; }
-            set { _modifyMemoryCount = value; }
+            get { return _modifyExperience; }
+            set { _modifyExperience = value; }
         }
-
-        public int RequiredMemoryCount
+        public int RequiredExperience
         {
-            get { return _requiredMemoryCount; }
-            set { _requiredMemoryCount = value; }
+            get { return _requiredExperience; }
+            set { _requiredExperience = value; }
         }
-
         public string Message
         {
             get { return _message; }
             set { _message = value; }
+        }
+        public int ModifyHealth
+        {
+            get { return _modifyHealth; }
+            set { _modifyHealth = value; }
         }
 
         #endregion

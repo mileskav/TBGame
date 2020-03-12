@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBGame.PresentationLayer"
         mc:Ignorable="d"
-        Title="GameSessionView" Height="500" Width="800" Background="#2a2d36" ResizeMode="CanMinimize">
+        Title="GameSessionView" Height="500" Width="800" Background="#132515" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style x:Key="WindowButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="125"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Background" Value="#484d51"/>
+            <Setter Property="Background" Value="#3b633f"/>
             <Setter Property="Foreground" Value="MidnightBlue"/>
             <Setter Property="FontFamily" Value="Gadugi"/>
             <Setter Property="Template">
@@ -184,7 +184,7 @@
                                 Text="{Binding Player.Name}"
                                 Style="{StaticResource MainPanelTextBoxStyle}"/>
                             <Label
-                                Content="Energy"
+                                Content="Entity"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource MainPanelLabelStyle}"/>
                             <TextBox
@@ -193,14 +193,14 @@
                             </StackPanel>
                             <StackPanel Margin="25, 5">
                                 <Label
-                                    Content="Current Memory"
+                                    Content="Health"
                                     HorizontalAlignment="Center"
                                     Style="{StaticResource MainPanelLabelStyle}"/>
                                 <TextBox
                                     Text="{Binding Player.CurrentMem}"
                                     Style="{StaticResource MainPanelTextBoxStyle}"/>
                                 <TextBlock
-                                    Text="Memories Collected"
+                                    Text="Experience Points"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Center"
                                     Margin="5"

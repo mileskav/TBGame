@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBGame.PresentationLayer"
         mc:Ignorable="d"
-        Title="Create a Player" Height="350" Width="350" Background="#2a2d36">
+        Title="Create a Player" Height="300" Width="350" Background="#132515">
     <Window.Resources>
         <Style x:Key="WindowButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="125"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Background" Value="#484d51"/>
+            <Setter Property="Background" Value="#3b633f"/>
             <Setter Property="Foreground" Value="MidnightBlue"/>
             <Setter Property="FontFamily" Value="Gadugi"/>
             <Setter Property="Template">
@@ -187,9 +187,15 @@
         <Border
             Style="{StaticResource BorderStyle}"
             Width="300"
-            Height="260"
+            Height="200"
             Margin="10">
             <StackPanel>
+                <TextBlock
+                    Name="ErrorMessageTextBlock"
+                    TextAlignment="Center"
+                    Foreground="IndianRed"
+                    Text=""
+                    Style="{StaticResource MainPanelTextBlockStyle}"/>
                 <Label
                     Content="New Player"
                     FontSize="16"
@@ -205,20 +211,14 @@
                     Style="{StaticResource MainPanelLabelStyle}"/>
                 <TextBox
                     Name="NameTextBox"
+                    Text="{Binding Player.Name}"
                     Style="{StaticResource MainPanelTextBoxStyle}"/>
                 <Label
-                    Content="Age"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource MainPanelLabelStyle}"/>
-                <TextBox
-                    Name="AgeTextBox"
-                    Style="{StaticResource MainPanelTextBoxStyle}"/>
-                <Label
-                    Content="Energy"
+                    Content="Entity"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MainPanelLabelStyle}"/>
                 <ComboBox 
-                    Name="EnergyComboBox"
+                    Name="EntityComboBox"
                     Width="100" 
                     HorizontalAlignment="Center" 
                     Height="20" 
@@ -232,12 +232,6 @@
                     Height="20"
                     Margin="10"
                     Style="{StaticResource WindowButtonStyle}" Click="OkButton_Click"/>
-                <TextBlock
-                    Name="ErrorMessageTextBlock"
-                    TextAlignment="Center"
-                    Foreground="IndianRed"
-                    Text=""
-                    Style="{StaticResource MainPanelTextBlockStyle}"/>
             </StackPanel>
         </Border>
     </Grid>

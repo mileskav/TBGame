@@ -12,24 +12,41 @@ namespace TBGame.Models
     public class Player : Character
     {
         #region FIELDS
-
-        private int _memories;
+        private int _health;
+        private int _experiencePoints;
         private List<Location> _locationsVisited;
 
         #endregion
 
         #region PROPERTIES
-
-        public int Memories
+        public int Health
         {
-            get { return _memories; }
+            get { return _health; }
             set
             {
-                _memories = value;
-                OnPropertyChanged(nameof(Memories));
+                _health = value;
+
+                if (_health > 100)
+                {
+                    _health = 100;
+                }
+                else if (_health <= 0)
+                {
+                    _health = 100;
+                }
+
+                OnPropertyChanged(nameof(Health));
             }
         }
-
+        public int ExperiencePoints
+        {
+            get { return _experiencePoints; }
+            set
+            {
+                _experiencePoints = value;
+                OnPropertyChanged(nameof(ExperiencePoints));
+            }
+        }
         public List<Location> LocationsVisited
         {
             get { return _locationsVisited; }
@@ -56,9 +73,9 @@ namespace TBGame.Models
 
         public override string Greeting()
         {
-            return $"Hi, my name is {Name} and I am feeling {EnergyLevel}.";
+            return $"Hi, my name is {Name} and I am an avatar of the {ControllingEntity}.";
         }
-        public override bool IsRemembered()
+        public override bool HasStatement()
         {
             return false;
         }

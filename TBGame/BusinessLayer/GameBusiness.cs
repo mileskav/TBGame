@@ -29,7 +29,7 @@ namespace TBGame.BusinessLayer
         /// </summary>
         private void InitializeDataSet()
         {
-            _messages = GameData.InitialMessages();
+            //
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace TBGame.BusinessLayer
         private void InstantiateAndShowView()
         {
             // instatiate the view model and initialize the data set
-            _gameSessionViewModel = new GameSessionViewModel(_player, GameData.InitialMessages());
+            _gameSessionViewModel = new GameSessionViewModel(_player, _messages);
             GameSessionView gameSessionView = new GameSessionView(_gameSessionViewModel);
 
             gameSessionView.DataContext = _gameSessionViewModel;
@@ -56,8 +56,8 @@ namespace TBGame.BusinessLayer
                 _playerSetupView.ShowDialog();
 
                 // setup game based player properties
-                _player.CurrentMem = 0;
-                _player.Memories = 0;
+                _player.Health = 100;
+                _player.ExperiencePoints = 0;
             }
             else
             {
