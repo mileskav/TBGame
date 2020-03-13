@@ -12,7 +12,7 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Background" Value="#3b633f"/>
-            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontFamily" Value="Gadugi"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -67,7 +67,7 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style x:Key="MainPanelTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Padding" Value="3,0,0,0"/>

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace TBGame.Models
 {
@@ -18,10 +18,11 @@ namespace TBGame.Models
         private string _name;
         private string _description;
         private bool _accessible;
-        private int _requiredMemoryCount;
-        private int _modifyMemoryCount;
-        private int _requiredItemId;
+        private int _requiredExperience;
+        private int _modifyExperience;
         private string _message;
+        private int _modifyHealth;
+        private int _requiredItemId;
         private ObservableCollection<GameItemQuantity> _gameItems;
 
         #endregion
@@ -52,30 +53,31 @@ namespace TBGame.Models
             set { _accessible = value; }
         }
 
-        public int ModifyMemoryCount
+        public int ModifyExperience
         {
-            get { return _modifyMemoryCount; }
-            set { _modifyMemoryCount = value; }
+            get { return _modifyExperience; }
+            set { _modifyExperience = value; }
         }
-
-        public int RequiredMemoryCount
+        public int RequiredExperience
         {
-            get { return _requiredMemoryCount; }
-            set { _requiredMemoryCount = value; }
+            get { return _requiredExperience; }
+            set { _requiredExperience = value; }
         }
-
-        public int RequiredItemId
-        {
-            get { return _requiredItemId; }
-            set { _requiredItemId = value; }
-        }
-
         public string Message
         {
             get { return _message; }
             set { _message = value; }
         }
-
+        public int ModifyHealth
+        {
+            get { return _modifyHealth; }
+            set { _modifyHealth = value; }
+        }
+        public int RequiredItemId
+        {
+            get { return _requiredItemId; }
+            set { _requiredItemId = value; }
+        }
         public ObservableCollection<GameItemQuantity> GameItems
         {
             get { return _gameItems; }
@@ -98,7 +100,6 @@ namespace TBGame.Models
         {
             return _name;
         }
-
         public void UpdateLocationGameItems()
         {
             ObservableCollection<GameItemQuantity> updatedLocationGameItems = new ObservableCollection<GameItemQuantity>();

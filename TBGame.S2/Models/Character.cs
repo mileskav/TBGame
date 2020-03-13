@@ -14,7 +14,6 @@ namespace TBGame.Models
         #region ENUMERABLES
         public enum Entity
         {
-            None,
             Buried,
             Corruption,
             Dark,

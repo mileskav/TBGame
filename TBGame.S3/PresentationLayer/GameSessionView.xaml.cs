@@ -31,7 +31,6 @@ namespace TBGame.PresentationLayer
         {
             Close();
         }
-
         private void PickUpButton_Click(object sender, RoutedEventArgs e)
         {
             if (LocationItemsDataGrid.SelectedItem != null)
@@ -39,7 +38,6 @@ namespace TBGame.PresentationLayer
                 _gameSessionViewModel.AddItemToInventory();
             }
         }
-
         private void PutDownButton_Click(object sender, RoutedEventArgs e)
         {
             if (LocationItemsDataGrid.SelectedItem != null)
@@ -47,7 +45,6 @@ namespace TBGame.PresentationLayer
                 _gameSessionViewModel.RemoveItemFromInventory();
             }
         }
-
         private void UseButton_Click(object sender, RoutedEventArgs e)
         {
             if (LocationItemsDataGrid.SelectedItem != null)

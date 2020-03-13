@@ -18,15 +18,14 @@ namespace TBGame.DataLayer
             return new Player()
             {
                 Id = 1,
-                Name = "Alex",
-                Age = 22,
-                EnergyLevel = Character.Energy.Average,
-                Memories = 0,
-                LocationId = 1,
+                Name = "Nathan",
+                ControllingEntity = Character.Entity.Stranger,
+                Health = 100,
+                ExperiencePoints = 0,
+                LocationId = 0,
                 Inventory = new ObservableCollection<GameItemQuantity>()
                 {
-                    new GameItemQuantity(GameItemById(001), 1),
-                    new GameItemQuantity(GameItemById(201), 5)
+                    new GameItemQuantity(GameItemById(201), 1)
                 }
             };
         }
@@ -36,19 +35,19 @@ namespace TBGame.DataLayer
             Map gameMap = new Map();
 
             gameMap.StandardGameItems = StandardGameItems();
-
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 1,
-                    Name = "Your Apartment",
-                    Description = "Your studio apartment, usually clean, is currently a complete mess. Dishes are piled up " +
-                    "on the kitchen counter, and the pale blue vase that used to hold a few small sunflowers now holds only " +
-                    "wilted stems. Books of all kinds are scattered on your bedside table, as well as on your bed - each one an " +
-                    "attempt at forcing yourself back into sleep. The only thing that remains organized is your clothing rack " +
-                    "in the corner, as you haven't touched more than two outfits in the last week.",
+                    Name = "The Magnus Institute",
+                    Description = "The Magnus Institute is just a normal building. It’s a bit small for something that’s " +
+                    "supposed to be an institute, but considering it’s for the paranormal that kind of makes sense. It’s " +
+                    "been there since before you were born and something about it unsettles you, though you’re not quite " +
+                    "sure what.",
                     Accessible = true,
-                    Message = "It is 2 AM. You find yourself awake in your apartment, alerted by the traffic outside.",
+                    Message = "You've been hired at the Magnus Institute as an Archival Assistant. The Institute always " +
+                    "needs more help looking into statements!",
+                    ModifyExperience = 10,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
                         new GameItemQuantity(GameItemById(001), 1)
@@ -60,14 +59,12 @@ namespace TBGame.DataLayer
                 (new Location()
                 {
                     Id = 2,
-                    Name = "Recurring Dream",
-                    Description = "A familiar sensation hits you as you find yourself in the same dream you've been having " +
-                    "on and off for a while. A thick fog causes this area to feel empty except for yourself and two mahogany " +
-                    "arm chairs. As you wonder who the second chair could be for, you notice a note on the ground that reads " +
-                    "\"THE ANSWER\" in messy handwriting - it's not yours. Suddenly, the fog dissipates slightly to reveal a " +
-                    "set of glass doors in front of you.",
+                    Name = "Archives",
+                    Description = "A subsection of the Magnus Institute located in the basement. This is where all " +
+                    "statements are processed and looked into. There’s nothing about it that should scare you, but it’s " +
+                    "even more unsettling than the building itself. At least the people here are nice.",
                     Accessible = true,
-                    ModifyMemoryCount = 1
+                    ModifyExperience = 10
                 }
                 );
 
@@ -75,14 +72,14 @@ namespace TBGame.DataLayer
                 (new Location()
                 {
                     Id = 3,
-                    Name = "Sunflower Field",
-                    Description = "You open your eyes to sunflowers taller than you are. While many face toward the sun, " +
-                    "you notice the closest two facing up at you instead. You find yourself staring at them for a while before " +
-                    "snapping your head back up upon hearing someone shout, \"Hello? Is someone there?\", followed by plants " +
-                    "rustling. It sounds as if the voice is coming from a farmhouse just barely out of sight over the flowers. ",
+                    Name = "The Tunnels",
+                    Description = "A series of tunnels built by Robert Smirke which connect the Magnus Institute to the " +
+                    "remnants of the Millbank Prison. The tunnels twist and turn in different directions to a point where " +
+                    "you’re almost constantly lost. There’s faded chalk on some of the walls. It almost reminds you of the " +
+                    "movie Labyrinth.  ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 1
+                    ModifyExperience = 30,
+                    RequiredItemId = 102
                 }
                 );
 
@@ -90,15 +87,14 @@ namespace TBGame.DataLayer
                 (new Location()
                 {
                     Id = 4,
-                    Name = "Old Farmhouse",
-                    Description = "You make your way out of the sunflower field and find yourself in front of the farmhouse. A cup " +
-                    "of coffee sits on a table by the front door, as a haze in the shape of a person stands at the porch steps. " +
-                    "\"You must've been the one I heard in the fields, huh?\", they say with a slight drawl. The house looks as if it " +
-                    "hasn't been well maintained, as paint flakes off of the house and the wooden planks of the porch creak when the " +
-                    "figure shifts their weight from one leg to the other.",
+                    Name = "The Deeper Tunnels",
+                    Description = "The tunnels become even more desolate as you move farther inside. It becomes darker " +
+                    "and darker and the chalk lines on the walls become more preserved. There are stairs going down to an " +
+                    "even lower level and as the chalk lines come to an abrupt stop you start to wonder if the person who " +
+                    "left the chalk got out of here alive. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 2
+                    ModifyExperience = 30,
+                    RequiredItemId = 103
                 }
                 );
 
@@ -106,19 +102,12 @@ namespace TBGame.DataLayer
                 (new Location()
                 {
                     Id = 5,
-                    Name = "Matilda's Palette - Front",
-                    Description = "Matilda's Palette is Hillview's sole art store as well as your place of employment, with walls " +
-                    "lined with shelves of canvas rolls, fabrics, and various paints and drawing tools. You recognize your most " +
-                    "frequented section of the store when you're not working: the watercolor kits. A less materialized version of " +
-                    "Matilda, the store's owner, greets you as you step inside before asking you to stock some of the back " +
-                    "shelves that have been cleared by today's sale.",
+                    Name = "Old Fishmarket Close",
+                    Description = "A long narrow road with a few different shops on it. It seems completely innocent during " +
+                    "the day, but at night it fills you with the fear that something could come out of the dark at any time.",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 1,
-                    GameItems = new ObservableCollection<GameItemQuantity>
-                    {
-                        new GameItemQuantity(GameItemById(102), 1)
-                    }
+                    ModifyExperience = 15,
+                    RequiredItemId = 201
                 }
                 );
 
@@ -126,175 +115,117 @@ namespace TBGame.DataLayer
                 (new Location()
                 {
                     Id = 6,
-                    Name = "Matilda's Palette - Back",
-                    Description = "You walk further through the store, passing by canvas frames and wooden easels. You notice different " +
-                    "looms and craft threads, knitting needles and balls of yarn. Along the back wall is a large cart piled with " +
-                    "store inventory that hasn't yet been put out. You also notice the locked back door alongside the stock cart, where " +
-                    "deliveries are often made from.",
+                    Name = "Stockwell Butcher Shop",
+                    Description = "The front looks like a normal butcher’s shop with meats dangling in the front window. " +
+                    "However, once you enter the building it looks almost abandoned. That is, until you enter the back room " +
+                    "which has a suspiciously placed table and a few lockers. You have a feeling that the table isn’t only " +
+                    "used for animals. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 2
+                    ModifyExperience = 20,
+                    RequiredItemId = 202
                 }
                 );
+
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 7,
-                    Name = "Alley",
-                    Description = "You unlock the back door to Matilda's and find yourself in the alley behind the art store. " +
-                    "Empty trash cans line the wall and a small notebook has been placed atop one of the trash can lids. Some " +
-                    "children across the street are drawing on the sidewalk with chalk, having already 'conquered' the back alley" +
-                    "with drawings of smiley faces and different animals.",
+                    Name = "Jazz Club",
+                    Description = "Do you like jazz? Of course you do! It’s a perfectly normal jazz club! Of course, maybe " +
+                    "you should bring some ear plugs for later. Things get a bit rowdy after a while. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 3,
-                    RequiredItemId = 102,
-                    GameItems = new ObservableCollection<GameItemQuantity>
-                    {
-                        new GameItemQuantity(GameItemById(104), 1)
-                    }
-                });
+                    ModifyExperience = 10
+                }
+                );
+
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 8,
-                    Name = "Parking Lot",
-                    Description = "Softly lit by street lamps and the sunset, the parking lot is nearly empty. It's closing " +
-                    "time at Matilda's Palette as a few remaining customers walk out of the store back to their cars. Your " +
-                    "dark blue car is parked along the right side of the parking lot, near the back.",
+                    Name = "Jane Prentiss' Apartment",
+                    Description = "It’s just a regular apartment from what you can tell. It’s got doors, windows, and " +
+                    "hallways just like any other apartment complex. But what’s that buzzing coming from above you?",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 3
-                });
+                    ModifyExperience = 20
+                }
+                );
+
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 9,
-                    Name = "Charlie's Apartment",
-                    Description = "You walk into your friend Charlie's apartment. While bigger than your own, their apartment " +
-                    "is also much more organized. Charlie - your memory of them much clearer than of most people - leans on the " +
-                    "arm of their couch as they brush a wig pinned to a styrofoam mannequin head. Their television quietly " +
-                    "plays reruns of a reality show you hadn't heard of. ",
+                    Name = "Jane Prentiss' Attic",
+                    Description = "Oh, that’s where the buzzing was coming from. You can see a large black blob in the " +
+                    "corner and it appears that the buzzing is coming from there. It doesn’t fill you with any sort of " +
+                    "joy, but it does fill you with a morbid sense of curiosity. It’s almost as if it’s speaking to you. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 1,
-                    GameItems = new ObservableCollection<GameItemQuantity>
-                    {
-                        new GameItemQuantity(GameItemById(107), 1)
-                    }
-                });
+                    ModifyExperience = 20
+                }
+                );
+
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 10,
-                    Name = "Silvercoast Park",
-                    Description = "Silvercoast Park, a block from Charlie's apartment, is lined with oak and maple trees " +
-                    "towering above park benches. A few people sitting at a nearby picnic table are nearly invisible with the " +
-                    "exception of a soft fog surrounding them. You wouldn't even think they were there if not for them eating " +
-                    "sandwiches at the table and chatting amongst each other. Further from the picnic area is a playground with " +
-                    "bright yellow slides, rock climbing walls, and a swingset.",
+                    Name = "Dalston Meat Plant",
+                    Description = "Unfortunately, this slaughter house seems to go on forever. The hallways wind together " +
+                    "and lead you to places you’re sure you’ve seen before. Oh, and don’t forget about the meat room. I’m " +
+                    "sure there’s not any humans in there. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 2
-                });
+                    ModifyExperience = 25
+                }
+                );
+
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 11,
-                    Name = "Hillview High School Hallway",
-                    Description = "You open a set of navy blue double doors to the hallway of your old high school. Some " +
-                    "classrooms have posters for various events taped to their doors - final sporting events, prom themes, " +
-                    "and schedules for summer programs. You find yourself most drawn to a poster for your theatre class: " +
-                    "'A Midsummer Night's Dream'. You remember having only been a stagehand for that production.",
+                    Name = "The Tundra",
+                    Description = "Boats are fun, aren’t they? This one’s constantly surrounded by fog, though, so that’s " +
+                    "a bit of a bummer. Also, its owner, Peter Lukas, isn’t the biggest fan of sea shanties. Be careful " +
+                    "not to say anything that could get you in trouble. Actually, it’s best to say nothing at all. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 1,
-                    RequiredItemId = 103
-                });
+                    ModifyExperience = 25
+                }
+                );
+
             gameMap.Locations.Add
                 (new Location()
                 {
                     Id = 12,
-                    Name = "Hillview High School Hallway",
-                    Description = "You keep walking down the hallway. Science projects are hung above the lockers lining the " +
-                    "hallway. While most classes are in session, you notice one classroom's door is open - your Senior year " +
-                    "English classroom.",
+                    Name = "Waltham Express Grill",
+                    Description = "Known for its meats and meat by-products, this fun little restaurant was shut down due " +
+                    "to an unfortunate cannibalistic event. It still seems like there’s someone - something, more likely - " +
+                    "walking around inside of it. Conveniently, there’s an opened window on the side. You would probably " +
+                    "prefer not to be eaten. ",
                     Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 2
-                });
-            gameMap.Locations.Add
-                (new Location()
-                {
-                    Id = 13,
-                    Name = "English 12 Classroom",
-                    Description = "The English classroom is void of students, but the whiteboard still reads the list of " +
-                    "assignments for today. A backpack still hangs on the chair of a student's desk near the front of the " +
-                    "classroom. Grammar posters hang from the walls as student projects are on display on the classroom's " +
-                    "bulletin board. Baskets of assignments, both unassigned and complete, lay on the teacher's desk, along " +
-                    "with a 3-ring binder labeled 'Answer Keys'.",
-                    Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 3,
-                    GameItems = new ObservableCollection<GameItemQuantity>
-                    {
-                        new GameItemQuantity(GameItemById(105), 1),
-                        new GameItemQuantity(GameItemById(001), 1)
-                    }
-                });
-            gameMap.Locations.Add
-                (new Location()
-                {
-                    Id = 14,
-                    Name = "Sidewalk",
-                    Description = "You exit the school through another pair of double doors that leads to the sidewalk. " +
-                    "Carefully groomed hedges are grown along the right of the sidewalk, with the exception of one that looks " +
-                    "as if someone had either been pushed through the bushes or had crawled through them recently. Up ahead is " +
-                    "the town's greenhouse, open all year round. ",
-                    Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 3
-                });
-            gameMap.Locations.Add
-                (new Location()
-                {
-                    Id = 15,
-                    Name = "Greenhouse",
-                    Description = "From floor to ceiling, the greenhouse is full of plants of all kinds. A wave of nostalgia hits you as " +
-                    "you see a small table in the left corner. It holds a box of seed packets and a small spade shovel, as well as a tray " +
-                    "of starter plants - a small tomato tag hangs off the side of the tray. You notice something shiny in the strawberry " +
-                    "bushes near the center of the greenhouse, next to your old jacket resting on a shelf of potting soil bags.",
-                    Accessible = false,
-                    ModifyMemoryCount = 1,
-                    RequiredMemoryCount = 1,
-                    RequiredItemId = 105,
-                    GameItems = new ObservableCollection<GameItemQuantity>
-                    {
-                        new GameItemQuantity(GameItemById(108), 1)
-                    }
-                });
-
+                    ModifyExperience = 25
+                }
+                );
             // set the initial location for the player
             gameMap.CurrentLocation = gameMap.Locations.FirstOrDefault(l => l.Id == 1);
 
             return gameMap;
         }
-
         public static List<GameItem> StandardGameItems()
         {
             return new List<GameItem>()
             {
                 //todo - add items
-                new Consumable(001, "Coffee", 10, "A medium cup of hot coffee.", 1, "You drink the cup of coffee. +1 Energy."),
-                new KeyItem(101, "Sunflower", 15, "A freshly picked sunflower in bloom.", "You place the sunflower in the vase of water.", KeyItem.UseActionType.COMBINE),
-                new KeyItem(102, "Matilda's Key", 0, "A key to the back door of Matilda's Palette.", "You unlock the back door.", KeyItem.UseActionType.OPENLOCATION),
-                new KeyItem(103, "Hillview Student ID", 0, "A student ID with your name and photo printed on it.", "You use your Student ID to enter the school.", KeyItem.UseActionType.OPENLOCATION),
-                new KeyItem(104, "Notebook", 0, "A small notebook that was being used for record keeping. A list of this week's inventory has been written down recently.", "You give the notebook to Matilda.", KeyItem.UseActionType.GIVENPC),
-                new KeyItem(105, "Greenhouse Key", 0, "A key to unlock the town Greenhouse.", "You unlock the greenhouse.", KeyItem.UseActionType.OPENLOCATION),
-                new KeyItem(106, "", 0, "", "", KeyItem.UseActionType.COMBINE),
-                new KeyItem(107, "", 0, "", "", KeyItem.UseActionType.GIVENPC),
-                new KeyItem(108, "", 0, "", "", KeyItem.UseActionType.COMBINE),
-                new Wallet(201, "$1 Bill", 1, "A dollar bill. Can be used for goods and services.", "You spent some of your money.")
+                new Consumable(001, "Coffee", 10, "A medium cup of lukewarm coffee.", 10, 5, "You drink the cup of coffee. +10 Health."),
+                new Consumable(002, "Apple", 5, "A large apple of the red delicious variety.", -10, 5, "You start to eat the apple until- Hey! There's teeth in there! -10 Health."),
+                new Consumable(003, "Apple", 5, "A smaller reddish honeycrisp apple.", 5, 5, "You eat the honeycrisp apple. +5 Health."),
+                new Consumable(004, "Unfortunate Leftovers", 2, "It's trash food! Mysteriously fresh.", +2, -5, "You eat the discarded food. You're disgusting. +2 Health."),
+                new Consumable(005, "Aged Notes", 1, "More trash. It reads \"He lingers. He looks. You won't see him coming.\"", -1, -5, "You eat the paper. It's dry and leaves you feeling like a lecture hall. -1 Health."),
+                new Consumable(006, "Food Wrapper", 1, "A plastic wrapper that used to contain food of a sort.", -2, -5, "You eat the wrapper. Tastes like plastic! -2 Health"),
+                new KeyItem(101, "Pack of Cigarettes", 10, "A half-empty box of Marlboro Red cigarettes.", 10, "You pull out a cigarette and hand it to the stranger.", KeyItem.UseActionType.GIVENPC),
+                new KeyItem(102, "Tunnels Key", 0, "A key to the Magnus Archive Tunnels.", 10, "You unlock the trap door to the tunnels.", KeyItem.UseActionType.OPENLOCATION),
+                new KeyItem(103, "Flashlight", 5, "A basic flashlight. It looks at least a few years old.", 5, "You turn on the flashlight.", KeyItem.UseActionType.OPENLOCATION),
+                new KeyItem(104, "Airpods", 30, "A pair of wireless earbuds given to you by Elias. They feel cheap.", 20, "You wear the airpods.", KeyItem.UseActionType.OPENLOCATION),
+                new Statement(201, "Statement #0122204", 0, "Statement regarding an encounter on Old Fishmarket Close.", 5, "", true),
+                new Statement(202, "Statement #0081103", 0, "Statement regarding their investigations during the summer of 2007.", 5, "", true),
+                new Statement(203, "", 0, "", 5, "", true)
+                
             };
         }
 

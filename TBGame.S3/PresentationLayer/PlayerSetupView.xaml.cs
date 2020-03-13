@@ -1,7 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using TBGame.Models;
 
 namespace TBGame.PresentationLayer
@@ -24,11 +33,11 @@ namespace TBGame.PresentationLayer
         private void SetupWindow()
         {
             // generate lists for enum to use in combo boxes
-            List<string> energy = Enum.GetNames(typeof(Player.Energy)).ToList();
+            List<string> energy = Enum.GetNames(typeof(Player.Entity)).ToList();
 
             // removes null item value
-            EnergyComboBox.SelectedIndex = 0;
-            EnergyComboBox.ItemsSource = energy;
+            EntityComboBox.SelectedIndex = 0;
+            EntityComboBox.ItemsSource = energy;
 
             // hide error message box initially
             ErrorMessageTextBlock.Visibility = Visibility.Hidden;
@@ -46,26 +55,20 @@ namespace TBGame.PresentationLayer
             {
                 _player.Name = NameTextBox.Text;
             }
-            if (!int.TryParse(AgeTextBox.Text, out int age))
-            {
-                errorMessage += "Player Age is required and must be an integer.\n";
-            }
-            else
-            {
-                _player.Age = age;
-            }
 
             return errorMessage == "" ? true : false;
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsValidInput(out string errorMessage))
+            string errorMessage;
+
+            if (IsValidInput(out errorMessage))
             {
                 // get values from combo boxes
-                Enum.TryParse(EnergyComboBox.SelectionBoxItem.ToString(), out Player.Energy energy);
+                Enum.TryParse(EntityComboBox.SelectionBoxItem.ToString(), out Player.Entity entity);
                 // set player properties
-                _player.EnergyLevel = energy;
+                _player.ControllingEntity = entity;
 
                 Visibility = Visibility.Hidden;
             }
@@ -76,5 +79,6 @@ namespace TBGame.PresentationLayer
                 ErrorMessageTextBlock.Text = errorMessage;
             }
         }
+
     }
 }

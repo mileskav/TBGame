@@ -8,11 +8,11 @@ namespace TBGame.Models
 {
     public class GameItem
     {
-        #region PROPERTIES
         public int Id { get; set; }
         public string Name { get; set; }
         public int Value { get; set; }
         public string Description { get; set; }
+        public int ExperiencePoints { get; set; }
         public string UseMessage { get; set; }
         public string Information
         {
@@ -21,24 +21,20 @@ namespace TBGame.Models
                 return InformationString();
             }
         }
-        #endregion
 
-        #region CONSTRUCTORS
-        public GameItem(int id, string name, int value, string description, string useMessage = "")
+        public GameItem(int id, string name, int value, string description, int experiencePoints, string useMessage = "")
         {
             Id = id;
             Name = name;
             Value = value;
             Description = description;
+            ExperiencePoints = experiencePoints;
             UseMessage = useMessage;
         }
-        #endregion
 
-        #region METHODS
         public virtual string InformationString()
         {
-            return $"{Name}: {Description}/nValue: {Value}";
+            return $"{Name}: {Description}\nValue: {Value}";
         }
-        #endregion
     }
 }

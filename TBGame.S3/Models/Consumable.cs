@@ -6,40 +6,34 @@ using System.Threading.Tasks;
 
 namespace TBGame.Models
 {
-    class Consumable : GameItem
+    public class Consumable : GameItem
     {
-        #region ENUMS
         public enum ConsumableType
         {
             Beverage,
             Food
         }
-        #endregion
 
-        #region PROPERTIES
-        public int EnergyChange { get; set; }
-        #endregion
+        public int HealthChange { get; set; }
 
-        #region CONSTRUCTORS
-        public Consumable(int id, string name, int value, string description, int energyChange, string useMessage) 
-            : base(id, name, value, description)
+        public Consumable(int id, string name, int value, string description, int healthChange,  int experiencePoints, string useMessage)
+            : base(id, name, value, description, experiencePoints)
         {
-            EnergyChange = energyChange;
+            UseMessage = useMessage;
+            HealthChange = healthChange;
         }
-        #endregion
 
-        #region METHODS
         public override string InformationString()
         {
-            if (EnergyChange != 0)
+            if (HealthChange != 0)
             {
-                return $"{Name}: {Description}\n Energy: {EnergyChange}";
+                return $"{Name}: {Description}\nHealth: {HealthChange}";
             }
             else
             {
                 return $"{Name}: {Description}";
             }
         }
-        #endregion
+
     }
 }

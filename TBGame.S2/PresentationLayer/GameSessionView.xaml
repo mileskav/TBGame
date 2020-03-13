@@ -96,7 +96,7 @@
                 <Border
                     Style="{StaticResource BorderStyle}"
                     Width="375"
-                    Height="310"
+                    Height="280"
                     Margin="20,15">
                     <StackPanel>
                         <TextBox
@@ -108,7 +108,7 @@
                             VerticalScrollBarVisibility="Auto"
                             TextWrapping="Wrap"
                             Width="320"
-                            Height="150"
+                            Height="120"
                             Text="{Binding CurrentLocation.Description, Mode=OneWay}"
                             Style="{StaticResource MainPanelTextBoxStyle}"/>
                         <ListBox
@@ -123,7 +123,7 @@
                 <Border 
                     Style="{StaticResource BorderStyle}"
                     Width="375"
-                    Height="90"
+                    Height="119"
                     Margin="20,-10">
                     <StackPanel>
                         <Label
@@ -132,7 +132,7 @@
                             Style="{StaticResource MainPanelLabelStyle}"/>
                         <TextBox
                             Width="300"
-                            Height="40"
+                            Height="60"
                             TextWrapping="Wrap"
                             VerticalScrollBarVisibility="Auto"
                             Text="{Binding MessageDisplay, Mode=OneWay}"

@@ -8,6 +8,7 @@ using TBGame;
 using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using TBGame.DataLayer;
+using System.Windows;
 
 namespace TBGame.PresentationLayer
 {
@@ -27,21 +28,11 @@ namespace TBGame.PresentationLayer
         #endregion
 
         #region PROPERTIES
-        public string CurrentLocationInformation
-        {
-            get { return _currentLocationInformation; }
-            set
-            {
-                _currentLocationInformation = value;
-                OnPropertyChanged(nameof(CurrentLocationInformation));
-            }
-        }
         public Player Player
         {
             get { return _player; }
             set { _player = value; }
         }
-
         public string MessageDisplay
         {
             get { return _currentLocation.Message; }
@@ -60,7 +51,6 @@ namespace TBGame.PresentationLayer
                 OnPropertyChanged(nameof(CurrentLocation));
             }
         }
-
         public ObservableCollection<Location> AccessibleLocations
         {
             get
@@ -73,7 +63,6 @@ namespace TBGame.PresentationLayer
                 OnPropertyChanged(nameof(AccessibleLocations));
             }
         }
-
         public string CurrentLocationName
         {
             get { return _currentLocationName; }
@@ -84,11 +73,19 @@ namespace TBGame.PresentationLayer
                 OnPropertyChanged("CurrentLocation");
             }
         }
-
         public GameItemQuantity CurrentGameItem
         {
             get { return _currentGameItem; }
             set { _currentGameItem = value; }
+        }
+        public string CurrentLocationInformation
+        {
+            get { return _currentLocationInformation; }
+            set
+            {
+                _currentLocationInformation = value;
+                OnPropertyChanged(nameof(CurrentLocationInformation));
+            }
         }
         #endregion
 
@@ -148,8 +145,18 @@ namespace TBGame.PresentationLayer
                 _player.LocationsVisited.Add(_currentLocation);
 
                 // update player experience points
-                _player.Memories += _currentLocation.ModifyMemoryCount;
+                _player.ExperiencePoints += _currentLocation.ModifyExperience;
 
+                // update player health
+                //
+                if (_currentLocation.ModifyHealth != 0)
+                {
+                    _player.Health += _currentLocation.ModifyHealth;
+                    if (_player.Health > 100)
+                    {
+                        _player.Health = 100;
+                    }
+                }
             }
 
             // display a new message if available
@@ -172,7 +179,7 @@ namespace TBGame.PresentationLayer
             {
                 if (
                     location.Accessible == true ||
-                    _player.Memories >= location.RequiredMemoryCount)
+                    _player.ExperiencePoints >= location.RequiredExperience)
                 {
                     _accessibleLocations.Add(location);
                 }
@@ -184,7 +191,6 @@ namespace TBGame.PresentationLayer
             // notify list box in view to update
             OnPropertyChanged(nameof(AccessibleLocations));
         }
-
         public void AddItemToInventory()
         {
             // confirm a game item is selected and in current location
@@ -200,7 +206,6 @@ namespace TBGame.PresentationLayer
                 OnPlayerPickUp(selectedGameItemQuantity);
             }
         }
-
         public void RemoveItemFromInventory()
         {
             // confirm game item is selected and is in inventory
@@ -216,17 +221,14 @@ namespace TBGame.PresentationLayer
                 OnPlayerPutDown(selectedGameItemQuantity);
             }
         }
-
         private void OnPlayerPickUp(GameItemQuantity gameItemQuantity)
         {
             _player.Wealth += gameItemQuantity.GameItem.Value;
         }
-
         private void OnPlayerPutDown(GameItemQuantity gameItemQuantity)
         {
             _player.Wealth -= gameItemQuantity.GameItem.Value;
         }
-
         public void OnUseGameItem()
         {
             switch (_currentGameItem.GameItem)
@@ -241,32 +243,54 @@ namespace TBGame.PresentationLayer
                     break;
             }
         }
-
         private void ProcessKeyItemUse(KeyItem keyItem)
         {
             string message;
 
             switch (keyItem.UseAction)
             {
-                case KeyItem.UseActionType.COMBINE:
-                    //todo - add to this
-                    break;
                 case KeyItem.UseActionType.OPENLOCATION:
                     message = _gameMap.OpenLocationsByKeyItem(keyItem.Id);
                     CurrentLocationInformation = keyItem.UseMessage;
                     break;
                 case KeyItem.UseActionType.GIVENPC:
-                    //todo - add to this
+                    //todo - work on this
                     break;
                 default:
                     break;
             }
         }
-
         private void ProcessConsumableUse(Consumable consumable)
         {
-            _player.EnergyLevel += consumable.EnergyChange;
+            _player.Health += consumable.HealthChange;
             _player.RemoveGameItemQuantityFromInventory(_currentGameItem);
+        }
+        private void OnPlayerDies(string message)
+        {
+            string messagetext = message + "\n\nWould you like to play again?";
+
+            string titleText = "Death";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show(messagetext, titleText, button);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    ResetPlayer();
+                    break;
+                case MessageBoxResult.No:
+                    QuitApplication();
+                    break;
+            }
+        }
+        private void QuitApplication()
+        {
+            Environment.Exit(0);
+        }
+
+        private void ResetPlayer()
+        {
+            Environment.Exit(0);
         }
         #endregion
 

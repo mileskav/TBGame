@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGame", "TBGame\TBGame.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGame.S2", "TBGame.S2\TBGame.S2.csproj", "{43E87AED-DA23-4127-AE63-17F52929E21A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBGame.S3", "TBGame.S3\TBGame.S3.csproj", "{3D4B91A1-A3CE-4179-B130-0DD40FCC696B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{43E87AED-DA23-4127-AE63-17F52929E21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E87AED-DA23-4127-AE63-17F52929E21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E87AED-DA23-4127-AE63-17F52929E21A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4B91A1-A3CE-4179-B130-0DD40FCC696B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4B91A1-A3CE-4179-B130-0DD40FCC696B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4B91A1-A3CE-4179-B130-0DD40FCC696B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4B91A1-A3CE-4179-B130-0DD40FCC696B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

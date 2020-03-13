@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using System.Windows.Data;
 
 namespace TBGame.Models
 {
@@ -14,34 +13,51 @@ namespace TBGame.Models
     public class Player : Character
     {
         #region FIELDS
-
-        private int _memories;
+        private int _health;
+        private int _experiencePoints;
         private List<Location> _locationsVisited;
         private ObservableCollection<GameItemQuantity> _inventory;
         private ObservableCollection<GameItemQuantity> _consumables;
         private ObservableCollection<GameItemQuantity> _keyItems;
+        private ObservableCollection<GameItemQuantity> _weapons;
+        private ObservableCollection<GameItemQuantity> _statements;
         private int _wealth;
-
         #endregion
 
         #region PROPERTIES
-
-        public int Memories
+        public int Health
         {
-            get { return _memories; }
+            get { return _health; }
             set
             {
-                _memories = value;
-                OnPropertyChanged(nameof(Memories));
+                _health = value;
+
+                if (_health > 100)
+                {
+                    _health = 100;
+                }
+                else if (_health <= 0)
+                {
+                    _health = 100;
+                }
+
+                OnPropertyChanged(nameof(Health));
             }
         }
-
+        public int ExperiencePoints
+        {
+            get { return _experiencePoints; }
+            set
+            {
+                _experiencePoints = value;
+                OnPropertyChanged(nameof(ExperiencePoints));
+            }
+        }
         public List<Location> LocationsVisited
         {
             get { return _locationsVisited; }
             set { _locationsVisited = value; }
         }
-        
         public ObservableCollection<GameItemQuantity> Inventory
         {
             get { return _inventory; }
@@ -56,6 +72,16 @@ namespace TBGame.Models
         {
             get { return _keyItems; }
             set { _keyItems = value; }
+        }
+        public ObservableCollection<GameItemQuantity> Weapons
+        {
+            get { return _weapons; }
+            set { _weapons = value; }
+        }
+        public ObservableCollection<GameItemQuantity> Statements
+        {
+            get { return _statements; }
+            set { _statements = value; }
         }
         public int Wealth
         {
@@ -73,8 +99,10 @@ namespace TBGame.Models
         public Player()
         {
             _locationsVisited = new List<Location>();
-            _consumables = new ObservableCollection<GameItemQuantity>();
+            _weapons = new ObservableCollection<GameItemQuantity>();
             _keyItems = new ObservableCollection<GameItemQuantity>();
+            _consumables = new ObservableCollection<GameItemQuantity>();
+            _statements = new ObservableCollection<GameItemQuantity>();
         }
 
         #endregion
@@ -88,21 +116,25 @@ namespace TBGame.Models
 
         public override string Greeting()
         {
-            return $"Hi, my name is {Name} and I am feeling {EnergyLevel}.";
+            return $"Hi, my name is {Name} and I am an avatar of the {ControllingEntity}.";
         }
-        public override bool IsRemembered()
+        public override bool HasStatement()
         {
             return false;
         }
         public void UpdateInventoryCategories()
         {
-            KeyItems.Clear();
             Consumables.Clear();
+            Weapons.Clear();
+            KeyItems.Clear();
+            Statements.Clear();
 
             foreach (var gameItemQuantity in _inventory)
             {
-                if (gameItemQuantity.GameItem is KeyItem) KeyItems.Add(gameItemQuantity);
                 if (gameItemQuantity.GameItem is Consumable) Consumables.Add(gameItemQuantity);
+                if (gameItemQuantity.GameItem is Weapon) Weapons.Add(gameItemQuantity);
+                if (gameItemQuantity.GameItem is KeyItem) KeyItems.Add(gameItemQuantity);
+                if (gameItemQuantity.GameItem is Statement) Statements.Add(gameItemQuantity);
             }
         }
         public void CalculateWealth()

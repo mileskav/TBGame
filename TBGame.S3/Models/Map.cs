@@ -40,13 +40,11 @@ namespace TBGame.Models
             get { return _accessibleLocations; }
             set { _accessibleLocations = value; }
         }
-
         public List<GameItem> StandardGameItems
         {
             get { return _standardGameItems; }
             set { _standardGameItems = value; }
         }
-
         #endregion
 
         #region CONSTRUCTORS
@@ -69,7 +67,6 @@ namespace TBGame.Models
         {
             return location.Accessible;
         }
-
         public string OpenLocationsByKeyItem(int keyItemId)
         {
             string message = "The item did nothing.";
@@ -83,7 +80,6 @@ namespace TBGame.Models
 
             return message;
         }
-
         #endregion
     }
 }

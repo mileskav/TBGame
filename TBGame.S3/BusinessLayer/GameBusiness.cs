@@ -17,7 +17,6 @@ namespace TBGame.BusinessLayer
     public class GameBusiness
     {
         bool _newPlayer = true;
-
         GameSessionViewModel _gameSessionViewModel;
         Player _player = new Player();
         PlayerSetupView _playerSetupView;
@@ -41,7 +40,8 @@ namespace TBGame.BusinessLayer
                 _playerSetupView.ShowDialog();
 
                 // setup up game based player properties
-                _player.Memories = 0;
+                _player.Health = 100;
+                _player.ExperiencePoints = 0;
             }
             else
             {

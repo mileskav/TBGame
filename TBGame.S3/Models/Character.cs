@@ -12,25 +12,30 @@ namespace TBGame.Models
     public abstract class Character : ObservableObject
     {
         #region ENUMERABLES
-
-        public enum Energy
+        public enum Entity
         {
-            Energized,
-            Average,
-            Tired,
-            Exhausted
+            Buried,
+            Corruption,
+            Dark,
+            Desolation,
+            End,
+            Eye,
+            Flesh,
+            Hunt,
+            Lonely,
+            Slaughter,
+            Spiral,
+            Stranger,
+            Vast,
+            Web
         }
-
         #endregion
 
         #region FIELDS
-
-        protected int _id; // must be a unique value for each object
+        protected int _id;
         protected string _name;
         protected int _locationId;
-        protected int _age;
-        protected Energy _energyLevel;
-
+        protected Entity _entity;
         #endregion
 
         #region PROPERTIES
@@ -53,16 +58,10 @@ namespace TBGame.Models
             set { _locationId = value; }
         }
 
-        public int Age
+        public Entity ControllingEntity
         {
-            get { return _age; }
-            set { _age = value; }
-        }
-
-        public Energy EnergyLevel
-        {
-            get { return _energyLevel; }
-            set { _energyLevel = value; }
+            get { return _entity; }
+            set { _entity = value; }
         }
 
         #endregion
@@ -74,10 +73,10 @@ namespace TBGame.Models
 
         }
 
-        public Character(string name, Energy energy, int locationId)
+        public Character(string name, Entity entity, int locationId)
         {
             _name = name;
-            _energyLevel = energy;
+            _entity = entity;
             _locationId = locationId;
         }
 
@@ -87,9 +86,9 @@ namespace TBGame.Models
 
         public virtual string Greeting()
         {
-            return "How's it going? You remember me, right?";
+            return $"Oh. You're from the institute, aren't you?";
         }
-        public abstract bool IsRemembered();
+        public abstract bool HasStatement();
 
         #endregion
     }
