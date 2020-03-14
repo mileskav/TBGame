@@ -87,7 +87,8 @@ namespace TBGame.DataLayer
                     "you’re almost constantly lost. There’s faded chalk on some of the walls. It almost reminds you of the " +
                     "movie Labyrinth.  ",
                     Accessible = false,
-                    ModifyExperience = 30
+                    ModifyExperience = 30,
+                    RequiredItemId = 102
                 }
                 );
 
@@ -101,7 +102,8 @@ namespace TBGame.DataLayer
                     "even lower level and as the chalk lines come to an abrupt stop you start to wonder if the person who " +
                     "left the chalk got out of here alive. ",
                     Accessible = false,
-                    ModifyExperience = 30
+                    ModifyExperience = 30,
+                    RequiredItemId = 103
                 }
                 );
 
@@ -220,7 +222,6 @@ namespace TBGame.DataLayer
         {
             return new List<GameItem>()
             {
-                //todo - add items
                 new Consumable(001, "Coffee", 10, "A medium cup of lukewarm coffee.", 10, 5, "You drink the cup of coffee. +10 Health."),
                 new Consumable(002, "Apple", 5, "A large apple of the red delicious variety.", -10, 5, "You start to eat the apple until- Hey! There's teeth in there! -10 Health."),
                 new Consumable(003, "Apple", 5, "A smaller reddish honeycrisp apple.", 5, 5, "You eat the honeycrisp apple. +5 Health."),

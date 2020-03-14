@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TBGame.Models
 {
-    abstract public class GameItem
+    public class GameItem
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -33,6 +33,9 @@ namespace TBGame.Models
             UseMessage = useMessage;
         }
 
-        public abstract string InformationString();
+        public virtual string InformationString()
+        {
+            return $"{Name}: {Description}\nValue: {Value}";
+        }
     }
 }

@@ -89,7 +89,7 @@ namespace TBGame.Models
 
         public Location()
         {
-            
+            _gameItems = new ObservableCollection<GameItemQuantity>();
         }
 
         #endregion
