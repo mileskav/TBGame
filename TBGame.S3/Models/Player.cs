@@ -63,6 +63,11 @@ namespace TBGame.Models
             get { return _inventory; }
             set { _inventory = value; }
         }
+        public ObservableCollection<GameItemQuantity> Weapons
+        {
+            get { return _weapons; }
+            set { _weapons = value; }
+        }
         public ObservableCollection<GameItemQuantity> Consumables
         {
             get { return _consumables; }
@@ -72,11 +77,6 @@ namespace TBGame.Models
         {
             get { return _keyItems; }
             set { _keyItems = value; }
-        }
-        public ObservableCollection<GameItemQuantity> Weapons
-        {
-            get { return _weapons; }
-            set { _weapons = value; }
         }
         public ObservableCollection<GameItemQuantity> Statements
         {
@@ -122,6 +122,10 @@ namespace TBGame.Models
         {
             return false;
         }
+        public void CalculateWealth()
+        {
+            Wealth = _inventory.Sum(i => i.GameItem.Value * i.Quantity);
+        }
         public void UpdateInventoryCategories()
         {
             Consumables.Clear();
@@ -136,10 +140,6 @@ namespace TBGame.Models
                 if (gameItemQuantity.GameItem is KeyItem) KeyItems.Add(gameItemQuantity);
                 if (gameItemQuantity.GameItem is Statement) Statements.Add(gameItemQuantity);
             }
-        }
-        public void CalculateWealth()
-        {
-            Wealth = _inventory.Sum(i => i.GameItem.Value);
         }
         public void AddGameItemQuantityToInventory(GameItemQuantity selectedGameItemQuantity)
         {
@@ -163,7 +163,9 @@ namespace TBGame.Models
         }
         public void RemoveGameItemQuantityFromInventory(GameItemQuantity selectedGameItemQuantity)
         {
+            //
             // locate selected item in inventory
+            //
             GameItemQuantity gameItemQuantity = _inventory.FirstOrDefault(i => i.GameItem.Id == selectedGameItemQuantity.GameItem.Id);
 
             if (gameItemQuantity != null)

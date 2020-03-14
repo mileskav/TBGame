@@ -12,7 +12,8 @@ namespace TBGame.Models
         public enum UseActionType
         {
             OPENLOCATION,
-            GIVENPC
+            GIVENPC,
+            DAMAGE
         }
         #endregion
 

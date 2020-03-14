@@ -23,8 +23,8 @@ namespace TBGame.PresentationLayer
         private Location _currentLocation;
         private ObservableCollection<Location> _accessibleLocations;
         private string _currentLocationName;
-        private GameItemQuantity _currentGameItem;
         private string _currentLocationInformation;
+        private GameItemQuantity _currentGameItem;
         #endregion
 
         #region PROPERTIES
@@ -73,11 +73,6 @@ namespace TBGame.PresentationLayer
                 OnPropertyChanged("CurrentLocation");
             }
         }
-        public GameItemQuantity CurrentGameItem
-        {
-            get { return _currentGameItem; }
-            set { _currentGameItem = value; }
-        }
         public string CurrentLocationInformation
         {
             get { return _currentLocationInformation; }
@@ -86,6 +81,11 @@ namespace TBGame.PresentationLayer
                 _currentLocationInformation = value;
                 OnPropertyChanged(nameof(CurrentLocationInformation));
             }
+        }
+        public GameItemQuantity CurrentGameItem
+        {
+            get { return _currentGameItem; }
+            set { _currentGameItem = value; }
         }
         #endregion
 
@@ -113,9 +113,6 @@ namespace TBGame.PresentationLayer
 
         #region METHODS
 
-        /// <summary>
-        /// initial setup of the game session view
-        /// </summary>
         private void InitializeView()
         {
             UpdateAccessibleLocations();
@@ -123,9 +120,6 @@ namespace TBGame.PresentationLayer
             _player.CalculateWealth();
         }
 
-        /// <summary>
-        /// player move event handler
-        /// </summary>
         private void OnPlayerMove()
         {
             // set new current location
@@ -136,7 +130,6 @@ namespace TBGame.PresentationLayer
                     _currentLocation = location;
                 }
             }
-            //_currentLocation = AccessibleLocations.FirstOrDefault(l => l.Name == _currentLocationName);
 
             // update stats if player has not visited the location
             if (!_player.HasVisited(_currentLocation))
@@ -148,7 +141,6 @@ namespace TBGame.PresentationLayer
                 _player.ExperiencePoints += _currentLocation.ModifyExperience;
 
                 // update player health
-                //
                 if (_currentLocation.ModifyHealth != 0)
                 {
                     _player.Health += _currentLocation.ModifyHealth;
@@ -165,10 +157,6 @@ namespace TBGame.PresentationLayer
             // update the list of locations
             UpdateAccessibleLocations();
         }
-
-        /// <summary>
-        /// update the accessible locations for the list box
-        /// </summary>
         private void UpdateAccessibleLocations()
         {
             // reset accessible locations list
@@ -193,11 +181,11 @@ namespace TBGame.PresentationLayer
         }
         public void AddItemToInventory()
         {
-            // confirm a game item is selected and in current location
+            // confirm a game item selected and is in current location
             // subtract from location and add to inventory
             if (_currentGameItem != null && _currentLocation.GameItems.Contains(_currentGameItem))
             {
-                // cast selected game item
+                // cast selected game item 
                 GameItemQuantity selectedGameItemQuantity = _currentGameItem as GameItemQuantity;
 
                 _currentLocation.RemoveGameItemQuantityFromLocation(selectedGameItemQuantity);
@@ -208,11 +196,11 @@ namespace TBGame.PresentationLayer
         }
         public void RemoveItemFromInventory()
         {
-            // confirm game item is selected and is in inventory
+            // confirm a game item selected and is in inventory
             // subtract from inventory and add to location
             if (_currentGameItem != null)
             {
-                // cast selected game item
+                // cast selected game item 
                 GameItemQuantity selectedGameItemQuantity = _currentGameItem as GameItemQuantity;
 
                 _currentLocation.AddGameItemQuantityToLocation(selectedGameItemQuantity);
@@ -223,6 +211,7 @@ namespace TBGame.PresentationLayer
         }
         private void OnPlayerPickUp(GameItemQuantity gameItemQuantity)
         {
+            _player.ExperiencePoints += gameItemQuantity.GameItem.ExperiencePoints;
             _player.Wealth += gameItemQuantity.GameItem.Value;
         }
         private void OnPlayerPutDown(GameItemQuantity gameItemQuantity)
@@ -253,8 +242,11 @@ namespace TBGame.PresentationLayer
                     message = _gameMap.OpenLocationsByKeyItem(keyItem.Id);
                     CurrentLocationInformation = keyItem.UseMessage;
                     break;
+                case KeyItem.UseActionType.DAMAGE:
+                    OnPlayerDies(keyItem.UseMessage);
+                    break;
                 case KeyItem.UseActionType.GIVENPC:
-                    //todo - work on this
+                    // todo - update
                     break;
                 default:
                     break;
@@ -267,7 +259,8 @@ namespace TBGame.PresentationLayer
         }
         private void OnPlayerDies(string message)
         {
-            string messagetext = message + "\n\nWould you like to play again?";
+            string messagetext = message +
+                "\n\nWould you like to play again?";
 
             string titleText = "Death";
             MessageBoxButton button = MessageBoxButton.YesNo;
@@ -287,7 +280,6 @@ namespace TBGame.PresentationLayer
         {
             Environment.Exit(0);
         }
-
         private void ResetPlayer()
         {
             Environment.Exit(0);

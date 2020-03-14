@@ -28,13 +28,11 @@ namespace TBGame.Models
             get { return _locations; }
             set { _locations = value; }
         }
-
         public Location CurrentLocation
         {
             get { return _currentLocation; }
             set { _currentLocation = value; }
         }
-
         public ObservableCollection<Location> AccessibleLocations
         {
             get { return _accessibleLocations; }
@@ -80,6 +78,7 @@ namespace TBGame.Models
 
             return message;
         }
+
         #endregion
     }
 }

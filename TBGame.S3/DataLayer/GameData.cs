@@ -25,16 +25,21 @@ namespace TBGame.DataLayer
                 LocationId = 0,
                 Inventory = new ObservableCollection<GameItemQuantity>()
                 {
-                    new GameItemQuantity(GameItemById(201), 1)
+                    new GameItemQuantity(GameItemById(201), 1),
+                    new GameItemQuantity(GameItemById(002), 1)
                 }
             };
         }
-
+        private static GameItem GameItemById(int id)
+        {
+            return StandardGameItems().FirstOrDefault(i => i.Id == id);
+        }
         public static Map GameMap()
         {
             Map gameMap = new Map();
 
             gameMap.StandardGameItems = StandardGameItems();
+
             gameMap.Locations.Add
                 (new Location()
                 {
@@ -64,7 +69,11 @@ namespace TBGame.DataLayer
                     "statements are processed and looked into. There’s nothing about it that should scare you, but it’s " +
                     "even more unsettling than the building itself. At least the people here are nice.",
                     Accessible = true,
-                    ModifyExperience = 10
+                    ModifyExperience = 10,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(002), 1)
+                    }
                 }
                 );
 
@@ -78,8 +87,7 @@ namespace TBGame.DataLayer
                     "you’re almost constantly lost. There’s faded chalk on some of the walls. It almost reminds you of the " +
                     "movie Labyrinth.  ",
                     Accessible = false,
-                    ModifyExperience = 30,
-                    RequiredItemId = 102
+                    ModifyExperience = 30
                 }
                 );
 
@@ -93,8 +101,7 @@ namespace TBGame.DataLayer
                     "even lower level and as the chalk lines come to an abrupt stop you start to wonder if the person who " +
                     "left the chalk got out of here alive. ",
                     Accessible = false,
-                    ModifyExperience = 30,
-                    RequiredItemId = 103
+                    ModifyExperience = 30
                 }
                 );
 
@@ -106,8 +113,7 @@ namespace TBGame.DataLayer
                     Description = "A long narrow road with a few different shops on it. It seems completely innocent during " +
                     "the day, but at night it fills you with the fear that something could come out of the dark at any time.",
                     Accessible = false,
-                    ModifyExperience = 15,
-                    RequiredItemId = 201
+                    ModifyExperience = 15
                 }
                 );
 
@@ -121,8 +127,7 @@ namespace TBGame.DataLayer
                     "which has a suspiciously placed table and a few lockers. You have a feeling that the table isn’t only " +
                     "used for animals. ",
                     Accessible = false,
-                    ModifyExperience = 20,
-                    RequiredItemId = 202
+                    ModifyExperience = 20
                 }
                 );
 
@@ -159,7 +164,11 @@ namespace TBGame.DataLayer
                     "corner and it appears that the buzzing is coming from there. It doesn’t fill you with any sort of " +
                     "joy, but it does fill you with a morbid sense of curiosity. It’s almost as if it’s speaking to you. ",
                     Accessible = false,
-                    ModifyExperience = 20
+                    ModifyExperience = 20,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(105), 1)
+                    }
                 }
                 );
 
@@ -222,16 +231,21 @@ namespace TBGame.DataLayer
                 new KeyItem(102, "Tunnels Key", 0, "A key to the Magnus Archive Tunnels.", 10, "You unlock the trap door to the tunnels.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(103, "Flashlight", 5, "A basic flashlight. It looks at least a few years old.", 5, "You turn on the flashlight.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(104, "Airpods", 30, "A pair of wireless earbuds given to you by Elias. They feel cheap.", 20, "You wear the airpods.", KeyItem.UseActionType.OPENLOCATION),
+                new KeyItem(105, "Wasp's Nest", 5, "Why did you take this? There's no honey in it, it's just a wasp's nest.", 15, "You stick your hand in the wasp's nest. You're allergic and the many stings kill you instantly.", KeyItem.UseActionType.DAMAGE),
                 new Statement(201, "Statement #0122204", 0, "Statement regarding an encounter on Old Fishmarket Close.", 5, "", true),
-                new Statement(202, "Statement #0081103", 0, "Statement regarding their investigations during the summer of 2007.", 5, "", true),
-                new Statement(203, "", 0, "", 5, "", true)
-                
+                new Statement(202, "Statement #0081103", 0, "Statement regarding investigations during the summer of 2007.", 5, "", true),
+                new Statement(203, "Statement #0131103", 0, "Statement regarding a live musical performance in Soho, London.", 5, "", true),
+                new Statement(204, "Statement #0142302", 0, "Statement regarding a wasp’s nest in their attic.", 5, "", true),
+                new Statement(205, "Statement #0130111", 0, "Statement regarding their time working at an industrial abattoir.", 5, "", true),
+                new Statement(206, "Statement #0110201", 0, "Statement regarding their work on a container ship.", 5, "", true),
+                new Statement(207, "Statement #0092010", 0, "Statement regarding explorations of an abandoned kebab shop.", 5, "", true),
+                new Weapon(301, "Metal Pipe", 10, 10, 30, "A metal pipe with a slight bend to it. You hope that the stains are just rust.", 15),
+                new Weapon(302, "Bolt Cutters", 10, 5, 15, "A pair of bolt cutters found in Waltham. Looking at them brings you memories of phantom pain.", 15),
+                new Weapon(303, "Martin's Poetry", 10, 10, 15, "A notebook of poetry written by Martin. Aggressively mediocre!", 15),
+                new Weapon(304, "Throwing Axe", 10, 15, 30, "A throwing axe that was \"remarkably easy to buy in central London.\" For you, it was remarkably easy to find in the institute.", 15)
+
             };
         }
 
-        private static GameItem GameItemById(int id)
-        {
-            return StandardGameItems().FirstOrDefault(i => i.Id == id);
-        }
     }
 }

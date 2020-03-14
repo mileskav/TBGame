@@ -89,7 +89,7 @@ namespace TBGame.Models
 
         public Location()
         {
-            _gameItems = new ObservableCollection<GameItemQuantity>();
+            
         }
 
         #endregion
@@ -116,9 +116,9 @@ namespace TBGame.Models
                 GameItems.Add(gameItemQuantity);
             }
         }
-
         public void AddGameItemQuantityToLocation(GameItemQuantity selectedGameItemQuantity)
         {
+            // locate selected item in location
             GameItemQuantity gameItemQuantity = _gameItems.FirstOrDefault(i => i.GameItem.Id == selectedGameItemQuantity.GameItem.Id);
 
             if (gameItemQuantity == null)
@@ -136,9 +136,9 @@ namespace TBGame.Models
 
             UpdateLocationGameItems();
         }
-
         public void RemoveGameItemQuantityFromLocation(GameItemQuantity selectedGameItemQuantity)
         {
+            // locate selected item in location
             GameItemQuantity gameItemQuantity = _gameItems.FirstOrDefault(i => i.GameItem.Id == selectedGameItemQuantity.GameItem.Id);
 
             if (gameItemQuantity != null)
@@ -155,6 +155,7 @@ namespace TBGame.Models
 
             UpdateLocationGameItems();
         }
+
         #endregion
     }
 }
