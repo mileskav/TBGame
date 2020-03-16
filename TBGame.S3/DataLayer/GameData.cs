@@ -25,12 +25,19 @@ namespace TBGame.DataLayer
                 LocationId = 0,
                 Inventory = new ObservableCollection<GameItemQuantity>()
                 {
-                    new GameItemQuantity(GameItemById(201), 1),
-                    new GameItemQuantity(GameItemById(002), 1)
+                    new GameItemQuantity(GameItemById(201), 1)
                 }
             };
         }
-        private static GameItem GameItemById(int id)
+        public static List<string> InitialMessages()
+        {
+            return new List<string>()
+            {
+                "You've been hired at the Magnus Institute as an Archival Assistant. You're still not sure what " +
+                "inspired you to apply, you've never been too interested in records, or the paranormal for that matter.",
+            };
+        }
+        public static GameItem GameItemById(int id)
         {
             return StandardGameItems().FirstOrDefault(i => i.Id == id);
         }
@@ -47,15 +54,16 @@ namespace TBGame.DataLayer
                     Name = "The Magnus Institute",
                     Description = "The Magnus Institute is just a normal building. It’s a bit small for something that’s " +
                     "supposed to be an institute, but considering it’s for the paranormal that kind of makes sense. It’s " +
-                    "been there since before you were born and something about it unsettles you, though you’re not quite " +
+                    "been here since before you were born and something about it unsettles you, though you’re not quite " +
                     "sure what.",
                     Accessible = true,
-                    Message = "You've been hired at the Magnus Institute as an Archival Assistant. The Institute always " +
-                    "needs more help looking into statements!",
+                    Message = "You've been hired at the Magnus Institute as an Archival Assistant. You're still not sure what " +
+                    "inspired you to apply, you've never been too interested in records, or the paranormal for that matter.",
                     ModifyExperience = 10,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
-                        new GameItemQuantity(GameItemById(001), 1)
+                        new GameItemQuantity(GameItemById(203), 1),
+                        new GameItemQuantity(GameItemById(003), 1)
                     }
                 }
                 );
@@ -72,7 +80,9 @@ namespace TBGame.DataLayer
                     ModifyExperience = 10,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
-                        new GameItemQuantity(GameItemById(002), 1)
+                        new GameItemQuantity(GameItemById(304), 1),
+                        new GameItemQuantity(GameItemById(202), 1),
+                        new GameItemQuantity(GameItemById(001), 2)
                     }
                 }
                 );
@@ -88,7 +98,12 @@ namespace TBGame.DataLayer
                     "movie Labyrinth.  ",
                     Accessible = false,
                     ModifyExperience = 30,
-                    RequiredItemId = 102
+                    RequiredItemId = 102,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(005), 1),
+                        new GameItemQuantity(GameItemById(006), 1)
+                    }
                 }
                 );
 
@@ -103,7 +118,11 @@ namespace TBGame.DataLayer
                     "left the chalk got out of here alive. ",
                     Accessible = false,
                     ModifyExperience = 30,
-                    RequiredItemId = 103
+                    RequiredItemId = 102 & 103,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(004), 1)
+                    }
                 }
                 );
 
@@ -115,7 +134,13 @@ namespace TBGame.DataLayer
                     Description = "A long narrow road with a few different shops on it. It seems completely innocent during " +
                     "the day, but at night it fills you with the fear that something could come out of the dark at any time.",
                     Accessible = false,
-                    ModifyExperience = 15
+                    ModifyExperience = 15,
+                    RequiredItemId = 201,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(106), 1),
+                        new GameItemQuantity(GameItemById(206), 1)
+                    }
                 }
                 );
 
@@ -129,7 +154,8 @@ namespace TBGame.DataLayer
                     "which has a suspiciously placed table and a few lockers. You have a feeling that the table isn’t only " +
                     "used for animals. ",
                     Accessible = false,
-                    ModifyExperience = 20
+                    ModifyExperience = 20,
+                    RequiredItemId = 202
                 }
                 );
 
@@ -141,7 +167,8 @@ namespace TBGame.DataLayer
                     Description = "Do you like jazz? Of course you do! It’s a perfectly normal jazz club! Of course, maybe " +
                     "you should bring some ear plugs for later. Things get a bit rowdy after a while. ",
                     Accessible = false,
-                    ModifyExperience = 10
+                    ModifyExperience = 10,
+                    RequiredItemId = 203
                 }
                 );
 
@@ -153,7 +180,12 @@ namespace TBGame.DataLayer
                     Description = "It’s just a regular apartment from what you can tell. It’s got doors, windows, and " +
                     "hallways just like any other apartment complex. But what’s that buzzing coming from above you?",
                     Accessible = false,
-                    ModifyExperience = 20
+                    ModifyExperience = 20,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(103), 1),
+                        new GameItemQuantity(GameItemById(002), 1)
+                    }
                 }
                 );
 
@@ -181,9 +213,10 @@ namespace TBGame.DataLayer
                     Name = "Dalston Meat Plant",
                     Description = "Unfortunately, this slaughter house seems to go on forever. The hallways wind together " +
                     "and lead you to places you’re sure you’ve seen before. Oh, and don’t forget about the meat room. I’m " +
-                    "sure there’s not any humans in there. ",
+                    "sure there’s not any humans in there.",
                     Accessible = false,
-                    ModifyExperience = 25
+                    ModifyExperience = 25,
+                    RequiredItemId = 205
                 }
                 );
 
@@ -196,7 +229,12 @@ namespace TBGame.DataLayer
                     "a bit of a bummer. Also, its owner, Peter Lukas, isn’t the biggest fan of sea shanties. Be careful " +
                     "not to say anything that could get you in trouble. Actually, it’s best to say nothing at all. ",
                     Accessible = false,
-                    ModifyExperience = 25
+                    ModifyExperience = 25,
+                    RequiredItemId = 206,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(101), 1)
+                    }
                 }
                 );
 
@@ -210,7 +248,12 @@ namespace TBGame.DataLayer
                     "walking around inside of it. Conveniently, there’s an opened window on the side. You would probably " +
                     "prefer not to be eaten. ",
                     Accessible = false,
-                    ModifyExperience = 25
+                    ModifyExperience = 25,
+                    RequiredItemId = 207,
+                    GameItems = new ObservableCollection<GameItemQuantity>
+                    {
+                        new GameItemQuantity(GameItemById(205), 1)
+                    }
                 }
                 );
             // set the initial location for the player
@@ -233,6 +276,7 @@ namespace TBGame.DataLayer
                 new KeyItem(103, "Flashlight", 5, "A basic flashlight. It looks at least a few years old.", 5, "You turn on the flashlight.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(104, "Airpods", 30, "A pair of wireless earbuds given to you by Elias. They feel cheap.", 20, "You wear the airpods.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(105, "Wasp's Nest", 5, "Why did you take this? There's no honey in it, it's just a wasp's nest.", 15, "You stick your hand in the wasp's nest. You're allergic and the many stings kill you instantly.", KeyItem.UseActionType.DAMAGE),
+                new KeyItem(106, "Attic Key", 5, "Jane Prentiss' attic key. Should you really be poking around up there?", 10, "You unlock the attic.", KeyItem.UseActionType.OPENLOCATION),
                 new Statement(201, "Statement #0122204", 0, "Statement regarding an encounter on Old Fishmarket Close.", 5, "", true),
                 new Statement(202, "Statement #0081103", 0, "Statement regarding investigations during the summer of 2007.", 5, "", true),
                 new Statement(203, "Statement #0131103", 0, "Statement regarding a live musical performance in Soho, London.", 5, "", true),
@@ -243,7 +287,7 @@ namespace TBGame.DataLayer
                 new Weapon(301, "Metal Pipe", 10, 10, 30, "A metal pipe with a slight bend to it. You hope that the stains are just rust.", 15),
                 new Weapon(302, "Bolt Cutters", 10, 5, 15, "A pair of bolt cutters found in Waltham. Looking at them brings you memories of phantom pain.", 15),
                 new Weapon(303, "Martin's Poetry", 10, 10, 15, "A notebook of poetry written by Martin. Aggressively mediocre!", 15),
-                new Weapon(304, "Throwing Axe", 10, 15, 30, "A throwing axe that was \"remarkably easy to buy in central London.\" For you, it was remarkably easy to find in the institute.", 15)
+                new Weapon(304, "Throwing Axe", 10, 15, 30, "It was \"remarkably easy to buy in central London.\" For you, it was remarkably easy to find in the institute.", 15)
 
             };
         }

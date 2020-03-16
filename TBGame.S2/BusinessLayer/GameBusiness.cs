@@ -21,7 +21,7 @@ namespace TBGame.BusinessLayer
         Player _player = new Player();
         PlayerSetupView _playerSetupView;
         Map _gameMap;
-
+        List<string> _messages;
         public GameBusiness()
         {
             SetupPlayer();

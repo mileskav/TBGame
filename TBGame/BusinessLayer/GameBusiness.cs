@@ -16,7 +16,6 @@ namespace TBGame.BusinessLayer
         List<string> _messages;
         bool _newPlayer = true;
         PlayerSetupView _playerSetupView;
-
         public GameBusiness()
         {
             SetupPlayer();
@@ -29,7 +28,8 @@ namespace TBGame.BusinessLayer
         /// </summary>
         private void InitializeDataSet()
         {
-            //
+            _player = GameData.PlayerData();
+            _messages = GameData.InitialMessages();
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace TBGame.Models
         {
             if (HealthChange != 0)
             {
-                return $"{Name}: {Description}\nHealth: {HealthChange}";
+                return $"{Name}: {Description}";
             }
             else
             {

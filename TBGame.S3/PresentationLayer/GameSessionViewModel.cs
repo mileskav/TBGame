@@ -129,6 +129,7 @@ namespace TBGame.PresentationLayer
                 {
                     _currentLocation = location;
                 }
+
             }
 
             // update stats if player has not visited the location
@@ -165,8 +166,7 @@ namespace TBGame.PresentationLayer
             // add all accessible locations to list
             foreach (Location location in _gameMap.Locations)
             {
-                if (
-                    location.Accessible == true ||
+                if (location.Accessible == true ||
                     _player.ExperiencePoints >= location.RequiredExperience)
                 {
                     _accessibleLocations.Add(location);
@@ -259,8 +259,7 @@ namespace TBGame.PresentationLayer
         }
         private void OnPlayerDies(string message)
         {
-            string messagetext = message +
-                "\n\nWould you like to play again?";
+            string messagetext = message + "\n\nWould you like to play again?";
 
             string titleText = "Death";
             MessageBoxButton button = MessageBoxButton.YesNo;

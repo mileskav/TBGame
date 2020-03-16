@@ -99,6 +99,7 @@ namespace TBGame.Models
         public Player()
         {
             _locationsVisited = new List<Location>();
+            _inventory = new ObservableCollection<GameItemQuantity>();
             _weapons = new ObservableCollection<GameItemQuantity>();
             _keyItems = new ObservableCollection<GameItemQuantity>();
             _consumables = new ObservableCollection<GameItemQuantity>();

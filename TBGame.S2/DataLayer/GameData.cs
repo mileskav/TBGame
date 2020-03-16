@@ -25,7 +25,14 @@ namespace TBGame.DataLayer
                 LocationId = 0
             };
         }
-
+        public static List<string> InitialMessages()
+        {
+            return new List<string>()
+            {
+                "You've been hired at the Magnus Institute as an Archival Assistant. You're still not sure what " +
+                "inspired you to apply, you've never been too interested in records, or the paranormal for that matter.",
+            };
+        }
         public static Map GameMap()
         {
             Map gameMap = new Map();

@@ -69,7 +69,7 @@ namespace TBGame.Models
         {
             string message = "The item did nothing.";
             Location mapLocation = new Location();
-
+            
             if (mapLocation != null && mapLocation.RequiredItemId == keyItemId)
             {
                 mapLocation.Accessible = true;

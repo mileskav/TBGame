@@ -35,7 +35,7 @@ namespace TBGame.Models
 
         public virtual string InformationString()
         {
-            return $"{Name}: {Description}\nValue: {Value}";
+            return $"{Name}\nValue: {Value}";
         }
     }
 }

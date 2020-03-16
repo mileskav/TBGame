@@ -32,7 +32,7 @@ namespace TBGame.Models
         #region METHODS
         public override string InformationString()
         {
-            return $"{Name}: {Description}\nValue: {Value}";
+            return $"{Name}\nValue: {Value}";
         }
         #endregion
     }

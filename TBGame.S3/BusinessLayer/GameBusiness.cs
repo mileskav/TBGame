@@ -21,6 +21,7 @@ namespace TBGame.BusinessLayer
         Player _player = new Player();
         PlayerSetupView _playerSetupView;
         Map _gameMap;
+        List<string> _messages;
 
         public GameBusiness()
         {
@@ -42,6 +43,10 @@ namespace TBGame.BusinessLayer
                 // setup up game based player properties
                 _player.Health = 100;
                 _player.ExperiencePoints = 0;
+                _player.Inventory = new ObservableCollection<GameItemQuantity>()
+                {
+                    new GameItemQuantity(GameData.GameItemById(201), 1)
+                };
             }
             else
             {
