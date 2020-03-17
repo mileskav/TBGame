@@ -18,7 +18,6 @@ namespace TBGame.Models
         private Location _currentLocation;
         private ObservableCollection<Location> _accessibleLocations;
         private List<GameItem> _standardGameItems;
-        private Map _gameMap;
 
         #endregion
 
@@ -43,11 +42,6 @@ namespace TBGame.Models
         {
             get { return _standardGameItems; }
             set { _standardGameItems = value; }
-        }
-        public Map GameMap
-        {
-            get { return _gameMap; }
-            set { _gameMap = value; }
         }
         #endregion
 
@@ -74,14 +68,15 @@ namespace TBGame.Models
         public string OpenLocationsByKeyItem(int keyItemId)
         {
             string message = "The item did nothing.";
-            Location mapLocation = new Location();
 
-            foreach (Location location in _gameMap.Locations)
+            //Location mapLocation = new Location();
+
+            foreach (Location location in _locations)
             {
-                if (mapLocation != null && mapLocation.RequiredItemId == keyItemId)
+                if (location != null && location.RequiredItemId == keyItemId)
                 {
-                    mapLocation.Accessible = true;
-                    message = $"{mapLocation.Name} is now accessible.";
+                    location.Accessible = true;
+                    message = $"{location.Name} is now accessible.";
                 }
             }
 

@@ -119,7 +119,7 @@ namespace TBGame.DataLayer
                     Accessible = false,
                     ModifyExperience = 30,
                     RequiredExperience = 50,
-                    RequiredItemId = 102 & 103,
+                    RequiredItemId = 103,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
                         new GameItemQuantity(GameItemById(004), 1)
