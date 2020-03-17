@@ -118,6 +118,7 @@ namespace TBGame.DataLayer
                     "left the chalk got out of here alive. ",
                     Accessible = false,
                     ModifyExperience = 30,
+                    RequiredExperience = 50,
                     RequiredItemId = 102 & 103,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
@@ -275,7 +276,7 @@ namespace TBGame.DataLayer
                 new KeyItem(102, "Tunnels Key", 0, "A key to the Magnus Archive Tunnels.", 10, "You unlock the trap door to the tunnels.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(103, "Flashlight", 5, "A basic flashlight. It looks at least a few years old.", 5, "You turn on the flashlight.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(104, "Airpods", 30, "A pair of wireless earbuds given to you by Elias. They feel cheap.", 20, "You wear the airpods.", KeyItem.UseActionType.OPENLOCATION),
-                new KeyItem(105, "Wasp's Nest", 5, "Why did you take this? There's no honey in it, it's just a wasp's nest.", 15, "You stick your hand in the wasp's nest. You're allergic and the many stings kill you instantly.", KeyItem.UseActionType.DAMAGE),
+                new KeyItem(105, "Wasp's Nest", 5, "Why did you take this? There's no honey in it, it's just a wasp's nest.", 15, "You stick your hand in the wasp's nest. The wasps swarm your hand and start stinging, killing you instantly.", KeyItem.UseActionType.DAMAGE),
                 new KeyItem(106, "Attic Key", 5, "Jane Prentiss' attic key. Should you really be poking around up there?", 10, "You unlock the attic.", KeyItem.UseActionType.OPENLOCATION),
                 new Statement(201, "Statement #0122204", 0, "Statement regarding an encounter on Old Fishmarket Close.", 5, "", true),
                 new Statement(202, "Statement #0081103", 0, "Statement regarding investigations during the summer of 2007.", 5, "", true),

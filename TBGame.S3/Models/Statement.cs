@@ -11,7 +11,7 @@ namespace TBGame.Models
         public bool OpensLocation { get; set; }
 
         public Statement(int id, string name, int value, string description, int experiencePoints, string useMessage, bool opensLocation)
-            : base(id, name, value, description, experiencePoints)
+            : base(id, name, value, description, experiencePoints, useMessage)
         {
             OpensLocation = opensLocation;
         }

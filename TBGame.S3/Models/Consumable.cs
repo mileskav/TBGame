@@ -17,7 +17,7 @@ namespace TBGame.Models
         public int HealthChange { get; set; }
 
         public Consumable(int id, string name, int value, string description, int healthChange,  int experiencePoints, string useMessage)
-            : base(id, name, value, description, experiencePoints)
+            : base(id, name, value, description, experiencePoints, useMessage)
         {
             UseMessage = useMessage;
             HealthChange = healthChange;

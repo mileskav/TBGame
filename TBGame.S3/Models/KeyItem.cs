@@ -23,7 +23,7 @@ namespace TBGame.Models
 
         #region CONSTRUCTORS
         public KeyItem(int id, string name, int value, string description, int experiencePoints, string useMessage, UseActionType useAction)
-            : base(id, name, value, description, experiencePoints)
+            : base(id, name, value, description, experiencePoints, useMessage)
         {
             UseAction = useAction;
         }
