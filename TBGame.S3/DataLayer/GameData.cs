@@ -182,6 +182,7 @@ namespace TBGame.DataLayer
                     "hallways just like any other apartment complex. But what’s that buzzing coming from above you?",
                     Accessible = false,
                     ModifyExperience = 20,
+                    RequiredItemId = 204,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
                         new GameItemQuantity(GameItemById(103), 1),
@@ -200,6 +201,7 @@ namespace TBGame.DataLayer
                     "joy, but it does fill you with a morbid sense of curiosity. It’s almost as if it’s speaking to you. ",
                     Accessible = false,
                     ModifyExperience = 20,
+                    RequiredItemId = 106,
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
                         new GameItemQuantity(GameItemById(105), 1)
@@ -278,13 +280,13 @@ namespace TBGame.DataLayer
                 new KeyItem(104, "Airpods", 30, "A pair of wireless earbuds given to you by Elias. They feel cheap.", 20, "You wear the airpods.", KeyItem.UseActionType.OPENLOCATION),
                 new KeyItem(105, "Wasp's Nest", 5, "Why did you take this? There's no honey in it, it's just a wasp's nest.", 15, "You stick your hand in the wasp's nest. The wasps swarm your hand and start stinging, killing you instantly.", KeyItem.UseActionType.DAMAGE),
                 new KeyItem(106, "Attic Key", 5, "Jane Prentiss' attic key. Should you really be poking around up there?", 10, "You unlock the attic.", KeyItem.UseActionType.OPENLOCATION),
-                new Statement(201, "Statement #0122204", 0, "Statement regarding an encounter on Old Fishmarket Close.", 5, "", true),
-                new Statement(202, "Statement #0081103", 0, "Statement regarding investigations during the summer of 2007.", 5, "", true),
-                new Statement(203, "Statement #0131103", 0, "Statement regarding a live musical performance in Soho, London.", 5, "", true),
-                new Statement(204, "Statement #0142302", 0, "Statement regarding a wasp’s nest in their attic.", 5, "", true),
-                new Statement(205, "Statement #0130111", 0, "Statement regarding their time working at an industrial abattoir.", 5, "", true),
-                new Statement(206, "Statement #0110201", 0, "Statement regarding their work on a container ship.", 5, "", true),
-                new Statement(207, "Statement #0092010", 0, "Statement regarding explorations of an abandoned kebab shop.", 5, "", true),
+                new Statement(201, "Statement #0122204", 0, "Statement regarding an encounter on Old Fishmarket Close.", 5, "You read the statement. Old Fishmarket Close is now available.", Statement.UseActionType.OPENLOCATION),
+                new Statement(202, "Statement #0081103", 0, "Statement regarding investigations during the summer of 2007.", 5, "You read the statement. Stockwell Butcher Shop is now available.", Statement.UseActionType.OPENLOCATION),
+                new Statement(203, "Statement #0131103", 0, "Statement regarding a live musical performance in Soho, London.", 5, "You read the statement. The Jazz Club is now available.", Statement.UseActionType.OPENLOCATION),
+                new Statement(204, "Statement #0142302", 0, "Statement regarding a wasp’s nest in their attic.", 5, "You read the statement. Jane Prentiss' Apartment is now available.", Statement.UseActionType.OPENLOCATION),
+                new Statement(205, "Statement #0130111", 0, "Statement regarding their time working at an industrial abattoir.", 5, "You read the statement. Dalston Meat Plant is now available.", Statement.UseActionType.OPENLOCATION),
+                new Statement(206, "Statement #0110201", 0, "Statement regarding their work on a container ship.", 5, "You read the statement. The Tundra is now available.", Statement.UseActionType.OPENLOCATION),
+                new Statement(207, "Statement #0092010", 0, "Statement regarding explorations of an abandoned kebab shop.", 5, "You read the statement. Waltham Express Grill is now available.", Statement.UseActionType.OPENLOCATION),
                 new Weapon(301, "Metal Pipe", 10, 10, 30, "A metal pipe with a slight bend to it. You hope that the stains are just rust.", 15),
                 new Weapon(302, "Bolt Cutters", 10, 5, 15, "A pair of bolt cutters found in Waltham. Looking at them brings you memories of phantom pain.", 15),
                 new Weapon(303, "Martin's Poetry", 10, 10, 15, "A notebook of poetry written by Martin. Aggressively mediocre!", 15),

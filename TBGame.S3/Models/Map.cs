@@ -65,7 +65,7 @@ namespace TBGame.Models
         {
             return location.Accessible;
         }
-        public string OpenLocationsByKeyItem(int keyItemId)
+        public string OpenLocationsByItem(int itemId)
         {
             string message = "The item did nothing.";
 
@@ -73,7 +73,7 @@ namespace TBGame.Models
 
             foreach (Location location in _locations)
             {
-                if (location != null && location.RequiredItemId == keyItemId)
+                if (location != null && location.RequiredItemId == itemId)
                 {
                     location.Accessible = true;
                     message = $"{location.Name} is now accessible.";

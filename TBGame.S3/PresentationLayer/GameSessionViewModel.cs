@@ -48,7 +48,9 @@ namespace TBGame.PresentationLayer
             set
             {
                 _currentLocation = value;
+                _currentLocationInformation = MessageDisplay;
                 OnPropertyChanged(nameof(CurrentLocation));
+                OnPropertyChanged(nameof(CurrentLocationInformation));
             }
         }
         public ObservableCollection<Location> AccessibleLocations
@@ -166,8 +168,8 @@ namespace TBGame.PresentationLayer
             // add all accessible locations to list
             foreach (Location location in _gameMap.Locations)
             {
-                if (location.Accessible == true ||
-                    _player.ExperiencePoints >= location.RequiredExperience)
+                if (location.Accessible == true )
+                    //|| _player.ExperiencePoints > location.RequiredExperience)
                 {
                     _accessibleLocations.Add(location);
                 }
@@ -228,6 +230,22 @@ namespace TBGame.PresentationLayer
                 case KeyItem keyItem:
                     ProcessKeyItemUse(keyItem);
                     break;
+                case Statement statement:
+                    ProcessStatementUse(statement);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void ProcessStatementUse(Statement statement)
+        {
+            string message;
+            switch (statement.UseAction)
+            {
+                case Statement.UseActionType.OPENLOCATION:
+                    message = _gameMap.OpenLocationsByItem(statement.Id);
+                    CurrentLocationInformation = statement.UseMessage;
+                    break;
                 default:
                     break;
             }
@@ -239,7 +257,7 @@ namespace TBGame.PresentationLayer
             switch (keyItem.UseAction)
             {
                 case KeyItem.UseActionType.OPENLOCATION:
-                    message = _gameMap.OpenLocationsByKeyItem(keyItem.Id);
+                    message = _gameMap.OpenLocationsByItem(keyItem.Id);
                     CurrentLocationInformation = keyItem.UseMessage;
                     break;
                 case KeyItem.UseActionType.DAMAGE:
@@ -254,7 +272,9 @@ namespace TBGame.PresentationLayer
         }
         private void ProcessConsumableUse(Consumable consumable)
         {
+            string message;
             _player.Health += consumable.HealthChange;
+            CurrentLocationInformation = consumable.UseMessage;
             _player.RemoveGameItemQuantityFromInventory(_currentGameItem);
         }
         private void OnPlayerDies(string message)

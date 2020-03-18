@@ -8,12 +8,14 @@ namespace TBGame.Models
 {
     public class Statement : GameItem
     {
-        public bool OpensLocation { get; set; }
-
-        public Statement(int id, string name, int value, string description, int experiencePoints, string useMessage, bool opensLocation)
+        public enum UseActionType
+        {
+            OPENLOCATION
+        }
+        public UseActionType UseAction { get; set; }
+        public Statement(int id, string name, int value, string description, int experiencePoints, string useMessage, UseActionType useAction)
             : base(id, name, value, description, experiencePoints, useMessage)
         {
-            OpensLocation = opensLocation;
         }
 
         public override string InformationString()

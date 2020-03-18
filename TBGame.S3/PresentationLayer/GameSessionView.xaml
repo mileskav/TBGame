@@ -135,7 +135,7 @@
                             Height="70"
                             TextWrapping="Wrap"
                             VerticalScrollBarVisibility="Auto"
-                            Text="{Binding MessageDisplay, Mode=OneWay}"
+                            Text="{Binding CurrentLocationInformation, Mode=OneWay}"
                             Style="{StaticResource MainPanelTextBoxStyle}"/>
                     </StackPanel>
                 </Border>
