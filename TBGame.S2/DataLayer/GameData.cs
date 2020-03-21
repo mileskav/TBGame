@@ -47,8 +47,8 @@ namespace TBGame.DataLayer
                     "been there since before you were born and something about it unsettles you, though you’re not quite " +
                     "sure what.",
                     Accessible = true,
-                    Message = "You've been hired at the Magnus Institute as an Archival Assistant. The Institute always " +
-                    "needs more help looking into statements!",
+                    Message = "You've been hired at the Magnus Institute as an Archival Assistant. You're still not sure what " +
+                    "inspired you to apply, you've never been too interested in records, or the paranormal for that matter.",
                     ModifyExperience = 10
                 }
                 );

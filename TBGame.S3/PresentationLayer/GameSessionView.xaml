@@ -143,51 +143,51 @@
             </StackPanel>
             <StackPanel Width="380" Margin="0,15,0,0">
                 <StackPanel Orientation="Horizontal" Margin="5, 0" Width="375">
-                <Border
+                    <Border
                     Style="{StaticResource BorderStyle}"
                     Width="200"
                     Height="220"
                     Margin="0">
-                    <StackPanel HorizontalAlignment="Center">
-                        <StackPanel Margin="30, 0">
-                            <Label
+                        <StackPanel HorizontalAlignment="Center">
+                            <StackPanel Margin="30, 0">
+                                <Label
                                 Content="Name"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource MainPanelLabelStyle}"/>
-                            <TextBox
+                                <TextBox
                                 Text="{Binding Player.Name}"
                                 Style="{StaticResource MainPanelTextBoxStyle}"/>
-                            <Label
+                                <Label
                                 Content="Entity"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource MainPanelLabelStyle}"/>
-                            <TextBox
+                                <TextBox
                                 Text="{Binding Player.ControllingEntity}"
                                 Style="{StaticResource MainPanelTextBoxStyle}"/>
-                            <Label
+                                <Label
                                     Content="Health"
                                     HorizontalAlignment="Center"
                                     Style="{StaticResource MainPanelLabelStyle}"/>
-                            <TextBox
+                                <TextBox
                                     Text="{Binding Player.Health}"
                                     Style="{StaticResource MainPanelTextBoxStyle}"/>
-                            <TextBlock
+                                <TextBlock
                                     Text="Experience Points"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Center"
                                     Margin="5"
                                     Style="{StaticResource MainPanelTextBlockStyle}"/>
-                            <TextBox
+                                <TextBox
                                     Text="{Binding Player.ExperiencePoints}"
                                     Style="{StaticResource MainPanelTextBoxStyle}"/>
+                            </StackPanel>
+                            <StackPanel Margin="25, 0">
+
+
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="25, 0">
-                            
-                            
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border
+                    </Border>
+                    <Border
                     Width="160"
                     Height="220"
                     Margin="10, 0"
