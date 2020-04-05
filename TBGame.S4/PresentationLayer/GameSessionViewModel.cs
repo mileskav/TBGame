@@ -421,7 +421,7 @@ namespace TBGame.PresentationLayer
             }
             else
             {
-                CurrentLocationInformation = "The current NPC is not battle ready. Your experience suffers.";
+                CurrentLocationInformation = "The NPC isn't ready to fight. -10 experience.";
                 _player.ExperiencePoints -= 10;
             }
         }

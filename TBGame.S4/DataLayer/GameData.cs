@@ -180,7 +180,12 @@ namespace TBGame.DataLayer
                     "used for animals. ",
                     Accessible = false,
                     ModifyExperience = 20,
-                    RequiredItemId = 202
+                    RequiredItemId = 202,
+                    NPCs = new ObservableCollection<NPC>
+                    {
+                        NPCById(101),
+                        NPCById(102)
+                    }
                 }
                 );
 
@@ -227,7 +232,7 @@ namespace TBGame.DataLayer
                     Id = 9,
                     Name = "Jane Prentiss' Attic",
                     Description = "Oh, that’s where the buzzing was coming from. You can see a large black blob in the " +
-                    "corner and it appears that the buzzing is coming from there. It doesn’t fill you with any sort of " +
+                    "corner, full of wasps flying in and out from various nest holes. It doesn’t fill you with any sort of " +
                     "joy, but it does fill you with a morbid sense of curiosity. It’s almost as if it’s speaking to you. ",
                     Accessible = false,
                     ModifyExperience = 20,
@@ -267,6 +272,10 @@ namespace TBGame.DataLayer
                     GameItems = new ObservableCollection<GameItemQuantity>
                     {
                         new GameItemQuantity(GameItemById(101), 1)
+                    },
+                    NPCs = new ObservableCollection<NPC>
+                    {
+                        NPCById(007)
                     }
                 }
                 );
@@ -341,12 +350,13 @@ namespace TBGame.DataLayer
                     Id = 001,
                     Name = "Jonathan Sims",
                     ControllingEntity = Character.Entity.Eye,
-                    Description = "Head Archivist of the Magnus Institute",
+                    Description = "Head Archivist of the Magnus Institute. Between the scars and exhaustion, he looks " +
+                    "perpetually stressed.",
                     Messages = new List<string>()
                     {
-                        "",
-                        "",
-                        ""
+                        "\"test\"",
+                        "\"ing\"",
+                        "\"abc\""
                     }
                 },
                 new Citizen()
@@ -354,11 +364,11 @@ namespace TBGame.DataLayer
                     Id = 002,
                     Name = "Elias Bouchard",
                     ControllingEntity = Character.Entity.Eye,
-                    Description = "",
+                    Description = "Head of the Institute itself, his knowing gaze fills you with dread.",
                     Messages = new List<string>()
                     {
-                        "",
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                 },
                 new Citizen()
@@ -366,23 +376,24 @@ namespace TBGame.DataLayer
                     Id = 003,
                     Name = "Martin Blackwood",
                     ControllingEntity = Character.Entity.Lonely,
-                    Description = "",
+                    Description = "One of the archival assistants, known to offer tea in these trying times.",
                     Messages = new List<string>()
                     {
-                        "",
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                 },
                 new Citizen()
                 {
                     Id = 004,
                     Name = "Timothy Stoker",
-                    ControllingEntity = Character.Entity.Buried,
-                    Description = "",
+                    ControllingEntity = Character.Entity.Desolation,
+                    Description = "One of the more excitable archival assistants. His scars remind you of Jon's, " +
+                    "but he manages to pull them off.",
                     Messages = new List<string>()
                     {
-                        "",
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                 },
                 new Citizen()
@@ -391,11 +402,12 @@ namespace TBGame.DataLayer
                     Name = "Sasha James",
                     ControllingEntity = Character.Entity.Stranger,
                     //todo - add to description
-                    Description = "There's something off about her.",
+                    Description = "One of the archival assistants. She looks normal to you, but you feel there's " +
+                    "something off about her.",
                     Messages = new List<string>()
                     {
-                        "",
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                     
                 },
@@ -403,12 +415,13 @@ namespace TBGame.DataLayer
                 {
                     Id = 006,
                     Name = "Jurgen Leitner",
-                    //todo - change entity
                     ControllingEntity = Character.Entity.Buried,
-                    Description = "",
+                    Description = "An old man who's priorities seem to be various forms of rare literature over " +
+                    "personal hygiene.",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                 },
                 new Creature()
@@ -416,11 +429,11 @@ namespace TBGame.DataLayer
                     Id = 101,
                     Name = "The Boneturner",
                     ControllingEntity = Character.Entity.Flesh,
-                    Description = "",
+                    Description = "A bulky, misshapen man, he appears to have many more limbs than the average person.",
                     Messages = new List<string>()
                     {
-                        "",
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     },
                     SkillLevel = 6,
                     CurrentWeapon = GameItemById(308) as Weapon
@@ -430,10 +443,12 @@ namespace TBGame.DataLayer
                     Id = 102,
                     Name = "Meat Pit",
                     ControllingEntity = Character.Entity.Flesh,
-                    Description = "",
+                    Description = "A toothy pit that resides in the butcher shop, chunks of what appear to be human remains hang " +
+                    "from its teeth.",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"Come closer, my sustenance.\"",
+                        "\"What's got you so scared, meat?\""
                     },
                     SkillLevel = 6,
                     CurrentWeapon = GameItemById(307) as Weapon
@@ -443,10 +458,10 @@ namespace TBGame.DataLayer
                     Id = 103, 
                     Name = "The Anglerfish",
                     ControllingEntity = Character.Entity.Stranger,
-                    Description = "",
+                    Description = "Feverish in appearance, this figure seems to be luring you in with swaying motions.",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"Have you got any cigarettes, lad?\""
                     }
                 },
                 new Creature()
@@ -454,10 +469,11 @@ namespace TBGame.DataLayer
                     Id = 104,
                     Name = "Alfred Grifter",
                     ControllingEntity = Character.Entity.Slaughter,
-                    Description = "",
+                    Description = "Frontman for the band Grifter's Bone, ",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"Why don't you stick around and listen to me 'n the boys play?\"",
+                        "\"123\""
                     },
                     SkillLevel = 7,
                     CurrentWeapon = GameItemById(305) as Weapon
@@ -470,7 +486,8 @@ namespace TBGame.DataLayer
                     Description = "",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     },
                     SkillLevel = 7,
                     CurrentWeapon = GameItemById(306) as Weapon
@@ -483,7 +500,8 @@ namespace TBGame.DataLayer
                     Description = "",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                 },
                 new Creature()
@@ -491,10 +509,11 @@ namespace TBGame.DataLayer
                     Id = 106,
                     Name = "John Haan",
                     ControllingEntity = Character.Entity.Flesh,
-                    Description = "",
+                    Description = "The owner of Waltham Express Grill, an older man who currently appears to be confrontational.",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     },
                     SkillLevel = 5,
                     CurrentWeapon = GameItemById(302) as Weapon
@@ -504,10 +523,12 @@ namespace TBGame.DataLayer
                     Id = 008,
                     Name = "Michael",
                     ControllingEntity = Character.Entity.Spiral,
-                    Description = "",
+                    Description = "A tall being with oddly long and oddly pointy fingers. Despite his uncanny appearance, he " +
+                    "seems friendly enough... for now.",
                     Messages = new List<string>()
                     {
-                        ""
+                        "\"testing\"",
+                        "\"123\""
                     }
                 }
             };
