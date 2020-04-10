@@ -420,7 +420,9 @@ namespace TBGame.DataLayer
                     "personal hygiene.",
                     Messages = new List<string>()
                     {
-                        "\"testing\"",
+                        "You ask Jurgen what's up with the figure at Old Fishmarket Close. He replies, " +
+                        "\"These... things... I find them hard enough to understand without trying to " +
+                        "force human frameworks onto them.\"",
                         "\"123\""
                     }
                 },
@@ -469,11 +471,12 @@ namespace TBGame.DataLayer
                     Id = 104,
                     Name = "Alfred Grifter",
                     ControllingEntity = Character.Entity.Slaughter,
-                    Description = "Frontman for the band Grifter's Bone, ",
+                    Description = "Frontman for the band Grifter's Bone, it's said that a deal with the devil gone wrong " +
+                    "fuels his band's desire to keep performing.",
                     Messages = new List<string>()
                     {
                         "\"Why don't you stick around and listen to me 'n the boys play?\"",
-                        "\"123\""
+                        "\"Don't worry pal, you won't need those earplugs when you listen to us.\""
                     },
                     SkillLevel = 7,
                     CurrentWeapon = GameItemById(305) as Weapon
@@ -483,11 +486,13 @@ namespace TBGame.DataLayer
                     Id = 105,
                     Name = "Grifter's Bone",
                     ControllingEntity = Character.Entity.Slaughter,
-                    Description = "",
+                    Description = "Alfred Grifter's jazz band. A few sour notes make you feel a rage you've never " +
+                    "felt before.",
                     Messages = new List<string>()
                     {
-                        "\"testing\"",
-                        "\"123\""
+                        "The trombone player plays a string of notes with seemingly no rhythm. Without the rest of the band, " +
+                        "his playing remainds relatively inoffensive.",
+                        "The trumpet player plays a B sharp. The piercing sound reminds you of an overused horror movie scream."
                     },
                     SkillLevel = 7,
                     CurrentWeapon = GameItemById(306) as Weapon
@@ -497,11 +502,10 @@ namespace TBGame.DataLayer
                     Id = 007,
                     Name = "Peter Lukas",
                     ControllingEntity = Character.Entity.Lonely,
-                    Description = "",
+                    Description = "A washed up pirate with a family legacy of isolation and attachment issues.",
                     Messages = new List<string>()
                     {
-                        "\"testing\"",
-                        "\"123\""
+                        "Peter silently stands, overall being a nuisance to society."
                     }
                 },
                 new Creature()
@@ -512,8 +516,7 @@ namespace TBGame.DataLayer
                     Description = "The owner of Waltham Express Grill, an older man who currently appears to be confrontational.",
                     Messages = new List<string>()
                     {
-                        "\"testing\"",
-                        "\"123\""
+                        "\"Meat is meat.\""
                     },
                     SkillLevel = 5,
                     CurrentWeapon = GameItemById(302) as Weapon
@@ -524,11 +527,14 @@ namespace TBGame.DataLayer
                     Name = "Michael",
                     ControllingEntity = Character.Entity.Spiral,
                     Description = "A tall being with oddly long and oddly pointy fingers. Despite his uncanny appearance, he " +
-                    "seems friendly enough... for now.",
+                    "seems friendly enough - for now.",
                     Messages = new List<string>()
                     {
-                        "\"testing\"",
-                        "\"123\""
+                        "You ask Michael what about Grifter's Bone's music makes people react so strongly. " +
+                        "His only response is, \"How would a melody describe itself when asked?\"",
+                        "\"Be wary around your archivist, the love and care for another person is a great beast, " +
+                        "an anchor- but that anchor can be twisted the same way your insides twist, a great spiraling " +
+                        "of all you are and all you never wanted to be.\""
                     }
                 }
             };
