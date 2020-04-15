@@ -35,7 +35,9 @@ namespace TBGame.DataLayer
                     MissionById(3),
                     MissionById(4),
                     MissionById(5),
-                    MissionById(6)
+                    MissionById(6),
+                    MissionById(7),
+                    MissionById(8)
                 }
             };
         }
@@ -583,7 +585,7 @@ namespace TBGame.DataLayer
                 new MissionTravel()
                 {
                     Id = 1,
-                    Name = "The Worm Lady's Abode",
+                    Name = "The Worm Woman's Abode",
                     Description = "Explore all locations associated with Jane Prentiss",
                     Status = Mission.MissionStatus.Incomplete,
                     RequiredLocations = new List<Location>()
@@ -665,6 +667,30 @@ namespace TBGame.DataLayer
                         NPCById(003),
                         NPCById(004),
                         NPCById(005)
+                    },
+                    ExperiencePoints = 75
+                },
+                new MissionGather()
+                {
+                    Id = 7,
+                    Name = "A Fishy Request",
+                    Description = "Find something for the Anglerfish",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredGameItemQuantities = new List<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(101), 1)
+                    },
+                    ExperiencePoints = 50
+                },
+                new MissionGather()
+                {
+                    Id = 8,
+                    Name = "Corruptive Origin",
+                    Description = "Search Jane Prentiss' apartment for answers",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredGameItemQuantities = new List<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(105), 1)
                     },
                     ExperiencePoints = 75
                 }
