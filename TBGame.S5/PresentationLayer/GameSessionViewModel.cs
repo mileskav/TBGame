@@ -17,6 +17,13 @@ namespace TBGame.PresentationLayer
     /// </summary>
     public class GameSessionViewModel : ObservableObject
     {
+        #region CONSTANTANTS
+
+        const string TAB = "\t";
+        const string NEW_LINE = "\n";
+
+        #endregion
+
         #region FIELDS
         private Player _player;
         private Map _gameMap;
@@ -234,10 +241,12 @@ namespace TBGame.PresentationLayer
         {
             _player.ExperiencePoints += gameItemQuantity.GameItem.ExperiencePoints;
             _player.Wealth += gameItemQuantity.GameItem.Value;
+            _player.UpdateMissionStatus();
         }
         private void OnPlayerPutDown(GameItemQuantity gameItemQuantity)
         {
             _player.Wealth -= gameItemQuantity.GameItem.Value;
+            _player.UpdateMissionStatus();
         }
         public void OnUseGameItem()
         {
@@ -283,6 +292,9 @@ namespace TBGame.PresentationLayer
                     OnPlayerDies(keyItem.UseMessage);
                     break;
                 case KeyItem.UseActionType.GIVENPC:
+                    message = keyItem.UseMessage;
+                    _player.UpdateMissionStatus();
+                    _player.RemoveGameItemQuantityFromInventory(_currentGameItem);
                     break;
                 default:
                     break;
@@ -319,6 +331,8 @@ namespace TBGame.PresentationLayer
             {
                 ISpeak speakingNPC = CurrentNPC as ISpeak;
                 CurrentLocationInformation = speakingNPC.Speak();
+                _player.NPCsEngaged.Add(_currentNPC);
+                _player.UpdateMissionStatus();
             }
         }
         private BattleModeName NPCBattleResponse()
@@ -428,16 +442,163 @@ namespace TBGame.PresentationLayer
         {
             _player.BattleMode = BattleModeName.ATTACK;
             Battle();
+            if (_currentNPC != null)
+                _player.NPCsEngaged.Add(_currentNPC);
+            _player.UpdateMissionStatus();
         }
         public void OnPlayerDefend()
         {
             _player.BattleMode = BattleModeName.DEFEND;
             Battle();
+            if (_currentNPC != null)
+                _player.NPCsEngaged.Add(_currentNPC);
+            _player.UpdateMissionStatus();
         }
         public void OnPlayerRetreat()
         {
             _player.BattleMode = BattleModeName.RETREAT;
             Battle();
+            if (_currentNPC != null)
+                _player.NPCsEngaged.Add(_currentNPC);
+            _player.UpdateMissionStatus();
+        }
+
+        private string GenerateMissionStatusInformation()
+        {
+            string missionStatusInformation;
+
+            double totalMissions = _player.Missions.Count();
+            double missionsCompleted = _player.Missions.Where(m => m.Status == Mission.MissionStatus.Complete).Count();
+
+            int percentMissionsCompleted = (int)((missionsCompleted / totalMissions) * 100);
+            missionStatusInformation = $"Missions Complete: {percentMissionsCompleted}%" + NEW_LINE;
+
+            if (percentMissionsCompleted == 0)
+            {
+                missionStatusInformation += "You haven't finished any assigned tasks yet. Be careful or you may find yourself losing " +
+                    "this job quicker than you started it.";
+            }
+            else if (percentMissionsCompleted <= 33)
+            {
+                missionStatusInformation += "You've finished a few tasks, but there are still a lot more to work on.";
+            }
+            else if (percentMissionsCompleted <= 66)
+            {
+                missionStatusInformation += "You're making good work of your tasklist so far.";
+            }
+            else if (percentMissionsCompleted == 100)
+            {
+                missionStatusInformation += "Congratulations! All assigned tasks have been completed.";
+            }
+
+            return missionStatusInformation;
+        }
+        private MissionStatusViewModel InitializeMissionStatusViewModel()
+        {
+            MissionStatusViewModel missionStatusViewModel = new MissionStatusViewModel();
+
+            missionStatusViewModel.MissionInformation = GenerateMissionStatusInformation();
+
+            missionStatusViewModel.Missions = new List<Mission>(_player.Missions);
+            foreach (Mission mission in missionStatusViewModel.Missions)
+            {
+                if (mission is MissionTravel)
+                    mission.StatusDetail = GenerateMissionTravelDetail((MissionTravel)mission);
+
+                if (mission is MissionEngage)
+                    mission.StatusDetail = GenerateMissionEngageDetail((MissionEngage)mission);
+
+                if (mission is MissionGather)
+                    mission.StatusDetail = GenerateMissionGatherDetail((MissionGather)mission);
+            }
+
+            return missionStatusViewModel;
+        }
+        public void OpenMissionStatusView()
+        {
+            MissionStatusView missionStatusView = new MissionStatusView(InitializeMissionStatusViewModel());
+
+            missionStatusView.Show();
+        }
+        private string GenerateMissionTravelDetail(MissionTravel mission)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+
+            sb.AppendLine("All Required Locations");
+            foreach (var location in mission.RequiredLocations)
+            {
+                sb.AppendLine(TAB + location.Name);
+            }
+
+            if (mission.Status == Mission.MissionStatus.Incomplete)
+            {
+                sb.AppendLine("Locations Yet to Visit");
+                foreach (var location in mission.LocationsNotCompleted(_player.LocationsVisited))
+                {
+                    sb.AppendLine(TAB + location.Name);
+                }
+            }
+
+            sb.Remove(sb.Length - 2, 2); // remove the last two characters that generate a blank line
+
+            return sb.ToString(); ;
+        }
+        private string GenerateMissionEngageDetail(MissionEngage mission)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+
+            sb.AppendLine("All Required NPCs");
+            foreach (var location in mission.RequiredNPCs)
+            {
+                sb.AppendLine(TAB + location.Name);
+            }
+
+            if (mission.Status == Mission.MissionStatus.Incomplete)
+            {
+                sb.AppendLine("NPCs Yet to Engage");
+                foreach (var location in mission.NPCsNotCompleted(_player.NPCsEngaged))
+                {
+                    sb.AppendLine(TAB + location.Name);
+                }
+            }
+
+            sb.Remove(sb.Length - 2, 2); // remove the last two characters that generate a blank line
+
+            return sb.ToString(); ;
+        }
+        private string GenerateMissionGatherDetail(MissionGather mission)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+
+            sb.AppendLine("All Required Game Items (Quantity)");
+            foreach (var gameItemQuantity in mission.RequiredGameItemQuantities)
+            {
+                sb.Append(TAB + gameItemQuantity.GameItem.Name);
+                sb.AppendLine($"  ( {gameItemQuantity.Quantity} )");
+            }
+
+            if (mission.Status == Mission.MissionStatus.Incomplete)
+            {
+                sb.AppendLine("Game Items Yet to Gather (Quantity)");
+                foreach (var gameItemQuantity in mission.GameItemQuantitiesNotCompleted(_player.Inventory.ToList()))
+                {
+                    // get the current quantity of game item in inventory
+                    int quantityInInventory = 0;
+                    GameItemQuantity gameItemQuantityGatherered = _player.Inventory.FirstOrDefault(gi => gi.GameItem.Id == gameItemQuantity.GameItem.Id);
+                    if (gameItemQuantityGatherered != null)
+                        quantityInInventory = gameItemQuantityGatherered.Quantity;
+
+                    sb.Append(TAB + gameItemQuantity.GameItem.Name);
+                    sb.AppendLine($"  ( {gameItemQuantity.Quantity - quantityInInventory} )");
+                }
+            }
+
+            sb.Remove(sb.Length - 2, 2); // remove the last two characters that generate a blank line
+
+            return sb.ToString(); ;
         }
         private void QuitApplication()
         {
@@ -445,7 +606,8 @@ namespace TBGame.PresentationLayer
         }
         private void ResetPlayer()
         {
-            Environment.Exit(0);
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
         #endregion
 

@@ -27,6 +27,15 @@ namespace TBGame.DataLayer
                 Inventory = new ObservableCollection<GameItemQuantity>()
                 {
                     new GameItemQuantity(GameItemById(201), 1)
+                },
+                Missions = new ObservableCollection<Mission>()
+                {
+                    MissionById(1),
+                    MissionById(2),
+                    MissionById(3),
+                    MissionById(4),
+                    MissionById(5),
+                    MissionById(6)
                 }
             };
         }
@@ -45,6 +54,21 @@ namespace TBGame.DataLayer
         private static NPC NPCById(int id)
         {
             return NPCs().FirstOrDefault(i => i.Id == id);
+        }
+        private static Mission MissionById(int id)
+        {
+            return Missions().FirstOrDefault(m => m.Id == id);
+        }
+        private static Location LocationById(int id)
+        {
+            List<Location> locations = new List<Location>();
+
+            foreach (Location location in GameMap().AccessibleLocations)
+            {
+                if (location != null) locations.Add(location);
+            }
+
+            return locations.FirstOrDefault(i => i.Id == id);
         }
         public static Map GameMap()
         {
@@ -349,7 +373,6 @@ namespace TBGame.DataLayer
                 new Weapon(308, "Bone Spur Whip", 15, 10, 20, "A whip made of human vertibrae. You hope it was no one you knew.", 15)
             };
         }
-
         public static List<NPC> NPCs()
         {
             return new List<NPC>()
@@ -550,6 +573,100 @@ namespace TBGame.DataLayer
                         "an anchor- but that anchor can be twisted the same way your insides twist, a great spiraling " +
                         "of all you are and all you never wanted to be.\""
                     }
+                }
+            };
+        }
+        public static List<Mission> Missions()
+        {
+            return new List<Mission>()
+            {
+                new MissionTravel()
+                {
+                    Id = 1,
+                    Name = "The Worm Lady's Abode",
+                    Description = "Explore all locations associated with Jane Prentiss",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredLocations = new List<Location>()
+                    {
+                        LocationById(8),
+                        LocationById(9)
+                    },
+                    ExperiencePoints = 100
+                },
+                new MissionGather()
+                {
+                    Id = 2,
+                    Name = "Breakfast",
+                    Description = "Locate and collect all required consumables",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredGameItemQuantities = new List<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(001), 1),
+                        new GameItemQuantity(GameItemById(003), 1)
+                    },
+                    ExperiencePoints = 50
+                },
+                new MissionGather()
+                {
+                    Id = 3,
+                    Name = "In Keiran's Footsteps",
+                    Description = "Locate and collect all required trash",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredGameItemQuantities = new List<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(004), 1),
+                        new GameItemQuantity(GameItemById(005), 1),
+                        new GameItemQuantity(GameItemById(006), 1)
+                    },
+                    ExperiencePoints = 75
+                },
+                new MissionEngage()
+                {
+                    Id = 4,
+                    Name = "Meat and Greet",
+                    Description = "Become accustomed to the nearby Avatars of the Flesh",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredNPCs = new List<NPC>()
+                    {
+                        NPCById(101),
+                        NPCById(102),
+                        NPCById(106)
+                    },
+                    ExperiencePoints = 75
+                },
+                new MissionGather()
+                {
+                    Id = 5,
+                    Name = "Personal Archives",
+                    Description = "Collect each assigned Statement",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredGameItemQuantities = new List<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(201), 1),
+                        new GameItemQuantity(GameItemById(202), 1),
+                        new GameItemQuantity(GameItemById(203), 1),
+                        new GameItemQuantity(GameItemById(204), 1),
+                        new GameItemQuantity(GameItemById(205), 1),
+                        new GameItemQuantity(GameItemById(206), 1),
+                        new GameItemQuantity(GameItemById(207), 1)
+                    },
+                    ExperiencePoints = 150
+                },
+                new MissionEngage()
+                {
+                    Id = 6,
+                    Name = "Networking",
+                    Description = "Greet your institute coworkers",
+                    Status = Mission.MissionStatus.Incomplete,
+                    RequiredNPCs = new List<NPC>()
+                    {
+                        NPCById(001),
+                        NPCById(002),
+                        NPCById(003),
+                        NPCById(004),
+                        NPCById(005)
+                    },
+                    ExperiencePoints = 75
                 }
             };
         }

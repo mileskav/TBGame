@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBGame.PresentationLayer"
         mc:Ignorable="d"
-        Title="The Magnus Archives" Height="675" Width="800" Background="#132515" ResizeMode="CanMinimize">
+        Title="The Magnus Archives" Height="675" Width="800" Background="#132515"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style x:Key="WindowButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="125"/>
@@ -411,6 +412,10 @@
                                 Content="Use"
                                 Style="{StaticResource WindowButtonStyle}"
                                 Click="UseButton_Click"/>
+                        <Button
+                                Content="Tasks"
+                                Style="{StaticResource WindowButtonStyle}"
+                                Click="MissionStatus_Click"/>
                     </StackPanel>
                 </StackPanel>
             </Border>

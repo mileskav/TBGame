@@ -263,9 +263,6 @@ namespace TBGame.PresentationLayer
                 case KeyItem.UseActionType.DAMAGE:
                     OnPlayerDies(keyItem.UseMessage);
                     break;
-                case KeyItem.UseActionType.GIVENPC:
-                    // todo - update
-                    break;
                 default:
                     break;
             }
