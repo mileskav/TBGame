@@ -63,14 +63,14 @@ namespace TBGame.DataLayer
         }
         private static Location LocationById(int id)
         {
-            List<Location> locations = new List<Location>();
+            //List<Location> locations = new List<Location>();
 
-            foreach (Location location in GameMap().AccessibleLocations)
-            {
-                if (location != null) locations.Add(location);
-            }
+            //foreach (Location location in GameMap().AccessibleLocations)
+            //{
+            //    if (location != null) locations.Add(location);
+            //}
 
-            return locations.FirstOrDefault(i => i.Id == id);
+            return GameMap().Locations.FirstOrDefault(i => i.Id == id);
         }
         public static Map GameMap()
         {
@@ -234,6 +234,10 @@ namespace TBGame.DataLayer
                     Accessible = false,
                     ModifyExperience = 10,
                     RequiredItemId = 203, 
+                    GameItems = new ObservableCollection<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(205), 1)
+                    },
                     NPCs = new ObservableCollection<NPC>
                     {
                         NPCById(008),
@@ -289,7 +293,11 @@ namespace TBGame.DataLayer
                     "sure there’s not any humans in there.",
                     Accessible = false,
                     ModifyExperience = 25,
-                    RequiredItemId = 205
+                    RequiredItemId = 205,
+                    GameItems = new ObservableCollection<GameItemQuantity>()
+                    {
+                        new GameItemQuantity(GameItemById(207), 1)
+                    }
                 }
                 );
 
@@ -327,10 +335,6 @@ namespace TBGame.DataLayer
                     Accessible = false,
                     ModifyExperience = 25,
                     RequiredItemId = 207,
-                    GameItems = new ObservableCollection<GameItemQuantity>
-                    {
-                        new GameItemQuantity(GameItemById(205), 1)
-                    },
                     NPCs = new ObservableCollection<NPC>
                     {
                         NPCById(106)
@@ -530,7 +534,7 @@ namespace TBGame.DataLayer
                     Messages = new List<string>()
                     {
                         "The trombone player plays a string of notes with seemingly no rhythm. Without the rest of the band, " +
-                        "his playing remainds relatively inoffensive.",
+                        "his playing remains relatively inoffensive.",
                         "The trumpet player plays a B sharp. The piercing sound reminds you of an overused horror movie scream."
                     },
                     SkillLevel = 7,

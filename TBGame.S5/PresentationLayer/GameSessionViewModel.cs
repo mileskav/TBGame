@@ -146,6 +146,7 @@ namespace TBGame.PresentationLayer
             UpdateAccessibleLocations();
             _player.UpdateInventoryCategories();
             _player.CalculateWealth();
+            _player.Missions = new ObservableCollection<Mission>(GameData.Missions());
         }
 
         private void OnPlayerMove()
@@ -471,7 +472,7 @@ namespace TBGame.PresentationLayer
             double missionsCompleted = _player.Missions.Where(m => m.Status == Mission.MissionStatus.Complete).Count();
 
             int percentMissionsCompleted = (int)((missionsCompleted / totalMissions) * 100);
-            missionStatusInformation = $"Missions Complete: {percentMissionsCompleted}%" + NEW_LINE;
+            missionStatusInformation = $"Tasks Complete: {percentMissionsCompleted}%" + NEW_LINE;
 
             if (percentMissionsCompleted == 0)
             {
@@ -482,7 +483,7 @@ namespace TBGame.PresentationLayer
             {
                 missionStatusInformation += "You've finished a few tasks, but there are still a lot more to work on.";
             }
-            else if (percentMissionsCompleted <= 66)
+            else if (percentMissionsCompleted <= 66 || percentMissionsCompleted > 100)
             {
                 missionStatusInformation += "You're making good work of your tasklist so far.";
             }

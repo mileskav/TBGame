@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBGame.PresentationLayer"
         mc:Ignorable="d"
-        Title="MissionStatusView" Height="450" Width="450" Background="#132515"
+        Title="MissionStatusView" Height="550" Width="600" Background="#132515"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="WindowButtonStyle" TargetType="Button">
@@ -94,7 +94,7 @@
     <Grid>
         <Border
             Margin="10"
-            Width="400"
+            Width="550"
             Style="{StaticResource BorderStyle}">
             <StackPanel>
                 <Label
@@ -105,7 +105,7 @@
                     Style="{StaticResource MainPanelLabelStyle}"/>
                 <TextBox
                     Height="60"
-                    Width="350"
+                    Width="450"
                     Margin="5"
                     BorderThickness="0"
                     TextWrapping="Wrap"
@@ -115,8 +115,8 @@
                     Style="{StaticResource MainPanelTextBoxStyle}"/>
                 <DataGrid 
                     x:Name="LocationItemsDataGrid"
-                    Height="220"
-                    Width="350"
+                    Height="300"
+                    Width="450"
                     Margin="10"
                     ItemsSource="{Binding Missions}" 
                     AutoGenerateColumns="False"
@@ -126,7 +126,7 @@
                             Header="Name" 
                             IsReadOnly="True"                 
                             Binding="{Binding Name, Mode=OneWay}"
-                            Width="150">
+                            Width="130">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
                                     <Setter Property="TextBlock.TextWrapping" Value="Wrap" />

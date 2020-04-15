@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBGame.PresentationLayer"
         mc:Ignorable="d"
-        Title="The Magnus Archives" Height="675" Width="800" Background="#132515"
+        Title="The Magnus Archives" Height="700" Width="800" Background="#132515"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style x:Key="WindowButtonStyle" TargetType="Button">
@@ -92,7 +92,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal" Height="600">
+        <StackPanel Orientation="Horizontal" Height="600" Margin="0,-40,0,0">
             <StackPanel Margin="-5,1" Width="400" HorizontalAlignment="Left">
                 <Border
                     Style="{StaticResource BorderStyle}"
@@ -293,15 +293,15 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,450,0,10" HorizontalAlignment="Center">
             <Border
-                    Style="{StaticResource BorderStyle}"
-                    Width="750"
-                    Height="170"
-                    Margin="-10">
+                Style="{StaticResource BorderStyle}"
+                Width="750"
+                Height="200"
+                Margin="-10">
                 <StackPanel Margin="10">
                     <TabControl 
                             x:Name="PlayerDataTabControl"
                             Width="auto"
-                            Height="100">
+                            Height="135">
                         <TabItem Header="Consumables"
                                 x:Name="ConsumableTabItem">
                             <DataGrid 
