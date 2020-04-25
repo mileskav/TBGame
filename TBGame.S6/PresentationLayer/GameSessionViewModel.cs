@@ -152,7 +152,7 @@ namespace TBGame.PresentationLayer
         }
         private void PlayMusic()
         {
-            SoundPlayer player = new SoundPlayer("C:\\Users\\User\\Desktop\\NMC\\spring 2020\\CIT195\\TB Quest Game\\TBGame-master\\TBGame-master\\TBGame.S6\\Assets\\TooCrazy_DavidFesliyan.wav");
+            SoundPlayer player = new SoundPlayer("..\\..\\Assets\\TooCrazy_DavidFesliyan.wav");
             player.Load();
             player.Play();
 
